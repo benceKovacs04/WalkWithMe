@@ -5,11 +5,15 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using WalkWithMe_UserService.Models;
+using WalkWithMe_UserService.Models.DbModel;
 
 namespace WalkWithMe_UserService
 {
@@ -26,6 +30,11 @@ namespace WalkWithMe_UserService
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services.AddDbContext<WalkWithMeUserContext>(options => options.UseSqlServer(Configuration.GetConnectionString("WalkWithMeUserContext")));
+            services.AddIdentity<User, IdentityRole>()
+                .AddEntityFrameworkStores<WalkWithMeUserContext>()
+                .AddDefaultTokenProviders();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
