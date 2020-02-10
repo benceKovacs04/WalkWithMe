@@ -1,0 +1,22 @@
+.ItemContainer {
+    border: 2px solid black;
+    width: 1200px;
+    margin: auto;
+    justify-content: center;
+    margin-bottom: 16px;
+}
+
+.FeedItem {
+    height: 500px;
+    display: block;
+    margin: auto;
+}
+
+.FeedItemFooter {
+    padding-top: 30px;
+}
+
+.FeedItemTitle {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
