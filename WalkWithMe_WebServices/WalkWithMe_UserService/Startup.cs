@@ -32,7 +32,16 @@ namespace WalkWithMe_UserService
             services.AddControllers();
 
             services.AddDbContext<WalkWithMeUserContext>(options => options.UseSqlServer(Configuration.GetConnectionString("WalkWithMeUserContext")));
-            services.AddIdentity<User, IdentityRole>()
+            services.AddIdentity<User, IdentityRole>(options => {
+                options.User.RequireUniqueEmail = false;
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequiredLength = 4;
+                options.Password.RequiredUniqueChars = 0;
+                options.Password.RequireNonAlphanumeric = false;
+                
+            })
                 .AddEntityFrameworkStores<WalkWithMeUserContext>()
                 .AddDefaultTokenProviders();
         }
