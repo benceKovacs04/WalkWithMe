@@ -50,8 +50,13 @@ namespace WalkWithMe_UserService.Controllers
                     signingCredentials: new SigningCredentials(authSigninKey, SecurityAlgorithms.HmacSha256)
                     );
 
+                CookieOptions tokenCookieOptions = new CookieOptions();
+                //tokenCookieOptions.Domain = _config.GetValue<string>("ServiceURL");
+                tokenCookieOptions.Expires = DateTime.Now.AddHours(3);
+                tokenCookieOptions.HttpOnly = true;
+
                 Response.StatusCode = 200;
-                Response.Cookies.Append("token", new JwtSecurityTokenHandler().WriteToken(token));
+                Response.Cookies.Append("token", new JwtSecurityTokenHandler().WriteToken(token), tokenCookieOptions);
 
                 /*return Ok(new
                 {
