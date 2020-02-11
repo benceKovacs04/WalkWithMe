@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -14,7 +15,7 @@ using WalkWithMe_UserService.Models;
 namespace WalkWithMe_UserService.Controllers
 {
     [ApiController]
-    public class UserAuthController : ControllerBase
+    public class UserAuthController : Controller
     {
         private UserManager<User> _userManager;
         private IConfiguration _config;
@@ -27,11 +28,11 @@ namespace WalkWithMe_UserService.Controllers
 
         [HttpPost]
         [Route("/userservice/login")]
-        public async Task<IActionResult> Login([FromBody] UserAuthModel authData) 
+        public async Task Login([FromBody] UserAuthModel authData) 
         {
             var user = await _userManager.FindByNameAsync(authData.Username);
 
-            if(user != null && await _userManager.CheckPasswordAsync(user, authData.Password))
+            if (user != null && await _userManager.CheckPasswordAsync(user, authData.Password))
             {
                 var authClaims = new[]
                 {
@@ -49,14 +50,22 @@ namespace WalkWithMe_UserService.Controllers
                     signingCredentials: new SigningCredentials(authSigninKey, SecurityAlgorithms.HmacSha256)
                     );
 
-                return Ok(new
+                Response.StatusCode = 200;
+                Response.Cookies.Append("token", new JwtSecurityTokenHandler().WriteToken(token));
+
+                /*return Ok(new
                 {
                     token = new JwtSecurityTokenHandler().WriteToken(token),
                     expiration = token.ValidTo
                 });
             }
 
-            return Unauthorized();
+            return Unauthorized();*/
+            }
+            else
+            {
+                Response.StatusCode = 401;
+            }
         }
 
         [HttpPost]
