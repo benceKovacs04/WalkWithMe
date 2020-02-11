@@ -40,7 +40,7 @@ namespace WalkWithMe_UserService.Controllers
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
                 };
 
-                var authSigninKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config.GetSection("JWTSecretKey").ToString()));
+                var authSigninKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config.GetValue<string>("JWTSecretKey")));
 
                 var token = new JwtSecurityToken(
                     issuer: _config.GetValue<string>("ServiceURL"),
@@ -51,21 +51,11 @@ namespace WalkWithMe_UserService.Controllers
                     );
 
                 CookieOptions tokenCookieOptions = new CookieOptions();
-                //tokenCookieOptions.Domain = _config.GetValue<string>("ServiceURL");
                 tokenCookieOptions.Expires = DateTime.Now.AddHours(3);
                 tokenCookieOptions.HttpOnly = true;
 
                 Response.StatusCode = 200;
                 Response.Cookies.Append("token", new JwtSecurityTokenHandler().WriteToken(token), tokenCookieOptions);
-
-                /*return Ok(new
-                {
-                    token = new JwtSecurityTokenHandler().WriteToken(token),
-                    expiration = token.ValidTo
-                });
-            }
-
-            return Unauthorized();*/
             }
             else
             {
