@@ -56,6 +56,8 @@ namespace WalkWithMe_UserService.Controllers
 
                 Response.StatusCode = 200;
                 Response.Cookies.Append("token", new JwtSecurityTokenHandler().WriteToken(token), tokenCookieOptions);
+
+                Response.Cookies.Append("secondaryToken", "loggedIn");
             }
             else
             {

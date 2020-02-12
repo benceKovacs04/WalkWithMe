@@ -1,6 +1,6 @@
 import React from "react";
 import classes from "./Toolbar.module.css";
-import UserAuth from "../../UserAuth/UserAuth";
+import UserAuth from "./UserAuth/UserAuth";
 
 const toolbar = props => (
     <header className={classes.Toolbar}>
