@@ -69,7 +69,7 @@ namespace WalkWithMe_UserService.Controllers
         }
 
         [HttpPost]
-        [Route("/userservice/register")]
+        [Route("/api/userservice/register")]
         public async Task<IActionResult> Register([FromBody] UserAuthModel authData)
         {
             User user = new User() { UserName = authData.Username };
@@ -84,6 +84,13 @@ namespace WalkWithMe_UserService.Controllers
             {
                 return BadRequest();
             }
+        }
+
+        [HttpGet]
+        [Route("/api/userservice/logout")]
+        public void Logout()
+        {
+
         }
     }
     
