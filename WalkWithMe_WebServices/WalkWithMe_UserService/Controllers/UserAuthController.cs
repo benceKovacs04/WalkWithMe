@@ -54,10 +54,13 @@ namespace WalkWithMe_UserService.Controllers
                 tokenCookieOptions.Expires = DateTime.Now.AddHours(3);
                 tokenCookieOptions.HttpOnly = true;
 
-                Response.StatusCode = 200;
                 Response.Cookies.Append("token", new JwtSecurityTokenHandler().WriteToken(token), tokenCookieOptions);
 
-                Response.Cookies.Append("secondaryToken", "loggedIn");
+                CookieOptions secondaryCookieOption = new CookieOptions();
+                secondaryCookieOption.Expires = DateTime.Now.AddHours(3);
+                Response.Cookies.Append("secondaryToken", "loggedIn", secondaryCookieOption);
+
+                Response.StatusCode = 200;
             }
             else
             {

@@ -1,13 +1,12 @@
-import React from "react";
+import React, { Fragment } from "react";
 import Toolbar from "../Navigation/Toolbar/Toolbar";
-import Aux from "../../hoc/Auxiliary";
 import classes from "./Layout.module.css";
 
 const layout = props => (
-    <Aux>
+    <Fragment>
         <Toolbar />
         <main className={classes.Content}>{props.children}</main>
-    </Aux>
+    </Fragment>
 );
 
 export default layout;

@@ -17,7 +17,11 @@ export default function Login(props) {
                 },
                 { withCredentials: true }
             )
-            .then(resp => console.log(resp))
+            .then(resp => {
+                if (resp.status === 200) {
+                    props.toggleLoggedIn();
+                }
+            })
             .then(props.closeModal());
         // props.login();
     };
