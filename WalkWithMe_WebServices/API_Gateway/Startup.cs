@@ -18,6 +18,7 @@ namespace API_Gateway
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
             services.AddOcelot();
         }
 
@@ -28,6 +29,9 @@ namespace API_Gateway
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCors(options => options.SetIsOriginAllowed(x => _ = true)
+                .AllowAnyMethod().AllowAnyHeader().AllowCredentials());
 
             app.UseOcelot().Wait();
 
