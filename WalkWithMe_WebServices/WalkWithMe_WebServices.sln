@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29424.173
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WalkWithMe_ImageService", "WalkWithMe_WebServices\WalkWithMe_ImageService.csproj", "{AD14A65D-4D90-41D8-945B-7B6758EBFF3C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WalkWithMe_ImageService", "WalkWithMe_WebServices\WalkWithMe_ImageService.csproj", "{AD14A65D-4D90-41D8-945B-7B6758EBFF3C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WalkWithMe_UserService", "WalkWithMe_UserService\WalkWithMe_UserService.csproj", "{49B2E0F8-91C2-40C4-B808-722A6E1A56CA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WalkWithMe_UserService", "WalkWithMe_UserService\WalkWithMe_UserService.csproj", "{49B2E0F8-91C2-40C4-B808-722A6E1A56CA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API_Gateway", "API_Gateway\API_Gateway.csproj", "{718B8906-CE59-44E0-9CC4-2121B9701811}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{49B2E0F8-91C2-40C4-B808-722A6E1A56CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{49B2E0F8-91C2-40C4-B808-722A6E1A56CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{49B2E0F8-91C2-40C4-B808-722A6E1A56CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{718B8906-CE59-44E0-9CC4-2121B9701811}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{718B8906-CE59-44E0-9CC4-2121B9701811}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{718B8906-CE59-44E0-9CC4-2121B9701811}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{718B8906-CE59-44E0-9CC4-2121B9701811}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

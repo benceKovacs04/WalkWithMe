@@ -27,7 +27,7 @@ namespace WalkWithMe_UserService.Controllers
         }
 
         [HttpPost]
-        [Route("/userservice/login")]
+        [Route("api/userservice/login")]
         public async Task Login([FromBody] UserAuthModel authData) 
         {
             var user = await _userManager.FindByNameAsync(authData.Username);
