@@ -15,8 +15,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+using WalkWithMe_UserService.Interfaces;
 using WalkWithMe_UserService.Models;
 using WalkWithMe_UserService.Models.DbModel;
+using WalkWithMe_UserService.Services;
 
 namespace WalkWithMe_UserService
 {
@@ -56,7 +58,8 @@ namespace WalkWithMe_UserService
             })
             .AddJwtBearer(options =>
             {
-                options.SaveToken = true;
+                //options.SaveToken = true;
+                options.SaveToken = false;
                 options.RequireHttpsMetadata = false;
                 options.TokenValidationParameters = new TokenValidationParameters()
                 {
@@ -67,6 +70,8 @@ namespace WalkWithMe_UserService
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration.GetValue<string>("JWTSecretKey")))
                 };
             });
+
+            services.AddScoped<ITokenService, TokenService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

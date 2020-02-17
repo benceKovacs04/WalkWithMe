@@ -42,7 +42,7 @@ export default function UserAuth() {
             ) : (
                 <span>
                     <Button click={toggleModalShowing} buttonText="Log in" />
-                    <Button buttonText="Register" />
+                    <Button buttonText="Sign up!" />
                 </span>
             )}
         </Fragment>
