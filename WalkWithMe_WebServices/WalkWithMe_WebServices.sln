@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WalkWithMe_ImageService", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WalkWithMe_UserService", "WalkWithMe_UserService\WalkWithMe_UserService.csproj", "{49B2E0F8-91C2-40C4-B808-722A6E1A56CA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API_Gateway", "API_Gateway\API_Gateway.csproj", "{718B8906-CE59-44E0-9CC4-2121B9701811}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API_Gateway", "API_Gateway\API_Gateway.csproj", "{718B8906-CE59-44E0-9CC4-2121B9701811}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

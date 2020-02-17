@@ -3,6 +3,8 @@ import Button from "../../../UI/Button/Button";
 import Login from "./Login";
 import Modal from "../../../UI/Modal/Modal";
 import LoggedInContext from "../../../../context/LoggedInContext";
+import axios from "axios";
+import Cookie from "js-cookie";
 
 export default function UserAuth() {
     const { loggedIn, toggleLoggedIn } = useContext(LoggedInContext);
@@ -11,6 +13,20 @@ export default function UserAuth() {
 
     const toggleModalShowing = () => {
         setModalShowing(!isModalShowing);
+    };
+
+    const logOut = () => {
+        axios
+            .get("https://localhost:5001/api/userservice/logout", {
+                withCredentials: true
+            })
+            .then(resp => {
+                if (resp.status === 200) {
+                    toggleLoggedIn();
+                    Cookie.remove("secondaryToken");
+                    Cookie.remove("token");
+                }
+            });
     };
 
     return (
@@ -22,7 +38,7 @@ export default function UserAuth() {
                 />
             </Modal>
             {loggedIn ? (
-                <Button buttonText="Log out" />
+                <Button click={logOut} buttonText="Log out" />
             ) : (
                 <span>
                     <Button click={toggleModalShowing} buttonText="Log in" />

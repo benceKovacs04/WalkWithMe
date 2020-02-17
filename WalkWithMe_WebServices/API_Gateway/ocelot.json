@@ -12,6 +12,18 @@
       ],
       "UpstreamPathTemplate": "/api/userservice/login",
       "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/userservice/logout",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44336
+        }
+      ],
+      "UpstreamPathTemplate": "/api/userservice/logout",
+      "UpstreamHttpMethod": [ "GET" ]
     }
   ],
   "GlobalConfiguration": {

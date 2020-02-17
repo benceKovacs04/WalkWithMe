@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -87,10 +88,12 @@ namespace WalkWithMe_UserService.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         [Route("/api/userservice/logout")]
         public void Logout()
         {
-
+            Response.StatusCode = 200;
+            Response.Cookies.Append("token", "loggedOut");
         }
     }
     
