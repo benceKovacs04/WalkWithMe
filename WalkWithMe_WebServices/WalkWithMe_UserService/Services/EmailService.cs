@@ -18,9 +18,9 @@ namespace WalkWithMe_UserService.Services
             _config = config;
         }
 
-        public async Task<bool> SendConfirmationEmail(string emailAddress, string link)
+        public async Task SendConfirmationEmail(string emailAddress, string link)
         {
-            var apiKEy = _config.GetValue<string>("SendGridAPIKey");
+            var apiKEy = Environment.GetEnvironmentVariable("Send_Grid_API_Key");
             var client = new SendGridClient(apiKEy);
             var from = new EmailAddress("walkwithme@walk.com", "Example");
             var to = new EmailAddress(emailAddress, "example user");
@@ -30,8 +30,6 @@ namespace WalkWithMe_UserService.Services
             var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
 
             var response = await client.SendEmailAsync(msg);
-
-            return true;
         }
     }
 }

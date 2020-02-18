@@ -7,6 +7,6 @@ namespace WalkWithMe_UserService.Interfaces
 {
     public interface IEmailService
     {
-        Task<bool> SendConfirmationEmail(string emailAddress, string link);
+        Task SendConfirmationEmail(string emailAddress, string link);
     }
 }
