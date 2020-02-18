@@ -3,12 +3,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
-using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using WalkWithMe_UserService.Interfaces;
@@ -36,7 +30,7 @@ namespace WalkWithMe_UserService.Controllers
         {
             var user = await _userManager.FindByNameAsync(authData.Username);
 
-            if (user != null && await _userManager.CheckPasswordAsync(user, authData.Password))
+            if (user != null && await _userManager.CheckPasswordAsync(user, authData.Password) && user.EmailConfirmed)
             {
 
                 _tokenService.SetLoginCookies(Response, user, _config);
@@ -45,11 +39,13 @@ namespace WalkWithMe_UserService.Controllers
             else
             {
                 Response.StatusCode = 401;
+                Response.ContentType = "application/json";
+                await Response.Body.WriteAsync(Encoding.UTF8.GetBytes("Login unsuccessful"));
             }
         }
 
         [HttpPost]
-        [Route("/api/userservice/register")]
+        [Route("/api/userservice/signup")]
         public async Task<IActionResult> Register([FromBody] UserAuthModel authData)
         {
             User user = new User() { UserName = authData.Username };
