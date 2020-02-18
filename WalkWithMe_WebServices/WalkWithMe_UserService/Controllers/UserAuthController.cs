@@ -54,6 +54,11 @@ namespace WalkWithMe_UserService.Controllers
 
             if (register.Succeeded)
             {
+                var emailToken = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                //var confirmationLink = Url.Action("confirmemail", "api/account", new { userId = user.Id, token = emailToken }, Request.Scheme);
+                var confirmationLink = Url.Link("ConfirmEmail", new { userId = user.Id, token = emailToken });
+                confirmationLink = confirmationLink.Replace($"{_config.GetValue<string>("ServiceURL")}", $"{_config.GetValue<string>("GateWayURL")}");
+                
                 return Ok();
             }
             else

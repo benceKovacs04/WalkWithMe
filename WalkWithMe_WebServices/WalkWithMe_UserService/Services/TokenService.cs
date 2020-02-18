@@ -23,8 +23,8 @@ namespace WalkWithMe_UserService.Services
             var authSigninKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config.GetValue<string>("JWTSecretKey")));
 
             var token = new JwtSecurityToken(
-                issuer: config.GetValue<string>("ServiceURL"),
-                audience: config.GetValue<string>("ServiceURL"),
+                issuer: config.GetValue<string>("GateWayURL"),
+                audience: config.GetValue<string>("GateWayURL"),
                 expires: DateTime.Now.AddHours(3),
                 claims: authClaims,
                 signingCredentials: new SigningCredentials(authSigninKey, SecurityAlgorithms.HmacSha256)
