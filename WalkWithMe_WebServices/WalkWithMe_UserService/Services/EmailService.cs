@@ -25,8 +25,8 @@ namespace WalkWithMe_UserService.Services
             var from = new EmailAddress("walkwithme@walk.com", "Example");
             var to = new EmailAddress(emailAddress, "example user");
             var subject = "Authenticate";
-            var plainTextContent = link;
-            var htmlContent = "<string>test</strong>";
+            var plainTextContent = "";
+            var htmlContent = $"You can verify your account by clicking <a href='{link}'>This link!</a>";
             var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
 
             var response = await client.SendEmailAsync(msg);
