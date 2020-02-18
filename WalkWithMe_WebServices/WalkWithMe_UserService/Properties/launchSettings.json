@@ -13,7 +13,6 @@
       "commandName": "IISExpress",
       "launchUrl": "weatherforecast",
       "environmentVariables": {
-        "Send_Grid_API_Key": "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",
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
