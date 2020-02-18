@@ -16,12 +16,14 @@ namespace WalkWithMe_UserService.Controllers
         private readonly UserManager<User> _userManager;
         private readonly IConfiguration _config;
         private readonly ITokenService _tokenService;
+        private readonly IEmailService _emailService;
 
-        public UserAuthController(UserManager<User> userManager, IConfiguration config, ITokenService tokenService) 
+        public UserAuthController(UserManager<User> userManager, IConfiguration config, ITokenService tokenService, IEmailService emailService) 
         {
             _userManager = userManager;
             _config = config;
             _tokenService = tokenService;
+            _emailService = emailService;
         }
 
         [HttpPost]
@@ -48,17 +50,16 @@ namespace WalkWithMe_UserService.Controllers
         [Route("/api/userservice/signup")]
         public async Task<IActionResult> Register([FromBody] UserAuthModel authData)
         {
-            User user = new User() { UserName = authData.Username };
+            User user = new User() { UserName = authData.Username, Email = authData.Email };
 
             var register = await _userManager.CreateAsync(user, authData.Password);
 
             if (register.Succeeded)
             {
                 var emailToken = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                //var confirmationLink = Url.Action("confirmemail", "api/account", new { userId = user.Id, token = emailToken }, Request.Scheme);
                 var confirmationLink = Url.Link("ConfirmEmail", new { userId = user.Id, token = emailToken });
                 confirmationLink = confirmationLink.Replace($"{_config.GetValue<string>("ServiceURL")}", $"{_config.GetValue<string>("GateWayURL")}");
-                
+                await _emailService.SendConfirmationEmail(user.Email, confirmationLink);
                 return Ok();
             }
             else

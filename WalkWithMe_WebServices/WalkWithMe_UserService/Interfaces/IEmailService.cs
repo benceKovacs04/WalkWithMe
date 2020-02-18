@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 
 namespace WalkWithMe_UserService.Interfaces
 {
-    internal interface IEmailService
+    public interface IEmailService
     {
-        bool SendConfirmationEmail();
+        Task<bool> SendConfirmationEmail(string emailAddress, string link);
     }
 }

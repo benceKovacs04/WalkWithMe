@@ -10,7 +10,7 @@ namespace WalkWithMe_UserService.Controllers
     public class AccountController : Controller
     {
         [HttpGet]
-        [Route("api/account/confirmemail", Name="ConfirmEmail")]
+        [Route("api/account/confirmemail", Name= "ConfirmEmail")]
         public void ConfirmEmail()
         {
 
