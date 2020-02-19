@@ -20,7 +20,7 @@ namespace WalkWithMe_UserService.Controllers
 
         [HttpGet]
         [Route("api/account/confirmemail", Name= "ConfirmEmail")]
-        public async void ConfirmEmail()
+        public async Task ConfirmEmail()
         {
             var userId = Request.Query["userId"].ToString();
             var token = Request.Query["token"].ToString();
