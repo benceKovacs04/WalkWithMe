@@ -18,17 +18,12 @@ export default function UserAuth() {
     };
 
     const logIn = () => {
-        setModalContent(
-            <Login
-                toggleLoggedIn={toggleLoggedIn}
-                closeModal={toggleModalShowing}
-            />
-        );
+        setModalContent("login");
         toggleModalShowing();
     };
 
     const signUp = () => {
-        setModalContent(<SignUp closeModal={toggleModalShowing} />);
+        setModalContent("signup");
         toggleModalShowing();
     };
 
@@ -49,7 +44,14 @@ export default function UserAuth() {
     return (
         <Fragment>
             <Modal show={isModalShowing} click={toggleModalShowing}>
-                {modalContent}
+                {modalContent === "login" ? (
+                    <Login
+                        toggleLoggedIn={toggleLoggedIn}
+                        closeModal={toggleModalShowing}
+                    />
+                ) : (
+                    <SignUp closeModal={toggleModalShowing} />
+                )}
             </Modal>
             {loggedIn ? (
                 <Button click={logOut} buttonText="Log out" />

@@ -81,7 +81,7 @@ export default function Signup(props) {
                 ></input>
             </div>
             <div>
-                <Button click={props.closeModal} buttonText="Sign Up!"></Button>
+                <Button click={signUp} buttonText="Sign Up!"></Button>
             </div>
         </div>
     );
