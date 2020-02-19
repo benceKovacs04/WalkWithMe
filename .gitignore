@@ -598,3 +598,4 @@ MigrationBackup/
 
 #MyStuff
 secret.json
+appsettings.json
