@@ -597,5 +597,4 @@ MigrationBackup/
 # End of https://www.gitignore.io/api/node,react,aspnetcore,visualstudio
 
 #MyStuff
-secret.json
-appsettings.json
+launchSettings.json

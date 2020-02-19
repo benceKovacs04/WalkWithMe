@@ -20,8 +20,8 @@ namespace WalkWithMe_UserService.Services
 
         public async Task SendConfirmationEmail(string emailAddress, string link)
         {
-            var apiKEy = Environment.GetEnvironmentVariable("Send_Grid_API_Key");
-            var client = new SendGridClient(apiKEy);
+            var apiKey = Environment.GetEnvironmentVariable("SendGrid_API_Key");
+            var client = new SendGridClient(apiKey);
             var from = new EmailAddress("walkwithme@walk.com", "Example");
             var to = new EmailAddress(emailAddress, "example user");
             var subject = "Authenticate";
