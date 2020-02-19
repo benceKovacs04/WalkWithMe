@@ -49,7 +49,11 @@ export default function Login(props) {
             <div>
                 <label for="password">Password</label>
             </div>
-            <input type="text" id="Password" onChange={passwordSetter}></input>
+            <input
+                type="password"
+                id="Password"
+                onChange={passwordSetter}
+            ></input>
             <div>
                 <Button click={loginClick} buttonText="Log in"></Button>
             </div>

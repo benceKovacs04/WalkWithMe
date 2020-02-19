@@ -1,0 +1,23 @@
+.Signup {
+    padding: 10px;
+    border: 1px black solid;
+    border-radius: 20px;
+    text-align: center;
+    padding: 40px;
+}
+
+.Signup label {
+    font-weight: bold;
+    color: black;
+    margin: 30px;
+}
+
+.Signup div {
+    padding: 5px;
+}
+
+.Signup input {
+    width: 300px;
+    height: 30px;
+    font-size: 24px;
+}

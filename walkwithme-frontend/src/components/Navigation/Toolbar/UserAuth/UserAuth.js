@@ -5,6 +5,7 @@ import Modal from "../../../UI/Modal/Modal";
 import LoggedInContext from "../../../../context/LoggedInContext";
 import axios from "axios";
 import Cookie from "js-cookie";
+import SignUp from "./Signup";
 
 export default function UserAuth() {
     const { loggedIn, toggleLoggedIn } = useContext(LoggedInContext);
@@ -27,7 +28,7 @@ export default function UserAuth() {
     };
 
     const signUp = () => {
-        setModalContent("signup");
+        setModalContent(<SignUp closeModal={toggleModalShowing} />);
         toggleModalShowing();
     };
 
