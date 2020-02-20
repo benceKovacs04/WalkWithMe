@@ -7,7 +7,7 @@ export default function Modal(props) {
         <Fragment>
             <Backdrop show={props.show} clicked={props.click} />
             <div
-                className={classes.Modal}
+                className={classes.MyModal}
                 style={{
                     transform: props.show
                         ? "translateY(0)"

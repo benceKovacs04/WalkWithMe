@@ -1,6 +1,6 @@
 .ItemContainer {
     border: 2px solid black;
-    width: 1200px;
+    width: auto;
     margin: auto;
     justify-content: center;
     margin-bottom: 16px;
