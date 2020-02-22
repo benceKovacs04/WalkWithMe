@@ -65,8 +65,8 @@ namespace WalkWithMe_UserService
                 {
                     ValidateIssuer = true,
                     ValidateAudience = true,
-                    ValidAudience = Configuration.GetValue<string>("ServiceURL"),
-                    ValidIssuer = Configuration.GetValue<string>("ServiceURL"),
+                    ValidAudience = Configuration.GetValue<string>("GateWayURL"),
+                    ValidIssuer = Configuration.GetValue<string>("GateWayURL"),
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration.GetValue<string>("JWTSecretKey")))
                 };
             });
