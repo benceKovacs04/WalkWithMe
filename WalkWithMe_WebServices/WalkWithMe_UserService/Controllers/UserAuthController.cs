@@ -28,7 +28,7 @@ namespace WalkWithMe_UserService.Controllers
 
         [HttpPost]
         [Route("api/userservice/login")]
-        public async Task Login([FromBody] UserAuthModel authData) 
+        public async Task Login([FromBody] UserLoginModel authData) 
         {
             var user = await _userManager.FindByNameAsync(authData.Username);
 
@@ -48,7 +48,7 @@ namespace WalkWithMe_UserService.Controllers
 
         [HttpPost]
         [Route("/api/userservice/signup")]
-        public async Task<IActionResult> Register([FromBody] UserAuthModel authData)
+        public async Task<IActionResult> Register([FromBody] UserSignUpModel authData)
         {
             User user = new User() { UserName = authData.Username, Email = authData.Email };
 

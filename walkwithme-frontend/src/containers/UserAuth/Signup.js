@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Button from "../../../UI/Button/Button";
+import Button from "../../components/UI/Button/Button";
 import classes from "./Signup.module.css";
 import axios from "axios";
 

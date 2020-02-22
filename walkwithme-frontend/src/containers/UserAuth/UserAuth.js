@@ -1,8 +1,8 @@
 import React, { Fragment, useState, useContext } from "react";
-import Button from "../../../UI/Button/Button";
+import Button from "../../components/UI/Button/Button";
 import Login from "./Login";
-import Modal from "../../../UI/Modal/Modal";
-import LoggedInContext from "../../../../context/LoggedInContext";
+import Modal from "../../components/UI/Modal/Modal";
+import LoggedInContext from "../../context/LoggedInContext";
 import axios from "axios";
 import Cookie from "js-cookie";
 import SignUp from "./Signup";

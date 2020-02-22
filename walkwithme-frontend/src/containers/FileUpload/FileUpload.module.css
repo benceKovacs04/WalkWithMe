@@ -1,0 +1,10 @@
+.Upload {
+    border: 2px dashed black;
+    text-align: center;
+    height: 100px;
+    line-height: 90px;
+}
+
+.Upload:hover {
+    cursor: pointer;
+}

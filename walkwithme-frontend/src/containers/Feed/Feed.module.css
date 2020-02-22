@@ -4,3 +4,7 @@
 ::-webkit-scrollbar {
     display: none;
 }
+
+.left-col {
+    align-content: center;
+}

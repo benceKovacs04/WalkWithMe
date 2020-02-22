@@ -97,6 +97,7 @@ namespace WalkWithMe_UserService
             {
                 endpoints.MapControllers();
             });
+
         }
     }
 }

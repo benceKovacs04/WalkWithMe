@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from "react";
 import classes from "./Login.module.css";
-import Button from "../../../UI/Button/Button";
+import Button from "../../components/UI/Button/Button";
 import axios from "axios";
 
 export default function Login(props) {
