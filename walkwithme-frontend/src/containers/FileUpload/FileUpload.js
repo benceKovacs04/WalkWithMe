@@ -13,15 +13,17 @@ export default function FileUpload() {
                 reader.onabort = () => console.log("file reading was aborted");
                 reader.onerror = () => console.log("file reading has failed");
                 reader.onload = () => {
-                    // Do whatever you want with the file contents
-
                     let base64str = reader.result;
                     const n = base64str.indexOf("base64,");
                     base64str = base64str.substring(n + 7, base64str.length);
 
-                    axios.post("https://localhost:5001/api/imageservice/test", {
-                        image: base64str
-                    });
+                    axios.post(
+                        "https://localhost:5001/api/imageservice/uploadimage",
+                        {
+                            image: base64str
+                        },
+                        { withCredentials: true }
+                    );
                 };
                 reader.readAsDataURL(file);
             });

@@ -16,7 +16,7 @@ namespace WalkWithMe_UserService.Services
         {
             var authClaims = new[]
                  {
-                    new Claim(JwtRegisteredClaimNames.Sub, user.UserName),
+                    new Claim(JwtRegisteredClaimNames.Sub, user.Id),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
                 };
 

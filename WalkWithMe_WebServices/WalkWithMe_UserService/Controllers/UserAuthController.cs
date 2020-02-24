@@ -73,6 +73,7 @@ namespace WalkWithMe_UserService.Controllers
         [Route("/api/userservice/logout")]
         public void Logout()
         {
+            var headers = Request.Headers;
             Response.StatusCode = 200;
             Response.Cookies.Append("token", "loggedOut");
         }
