@@ -2,24 +2,30 @@ import React, { useState, useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 import classes from "./FileUpload.module.css";
 import EXIF from "exif-js";
+import axios from "axios";
 
 export default function FileUpload() {
     const onDrop = useCallback(acceptedFiles => {
-        acceptedFiles.forEach(file => {
-            const reader = new FileReader();
+        {
+            acceptedFiles.forEach(file => {
+                const reader = new FileReader();
 
-            reader.onabort = () => console.log("file reading was aborted");
-            reader.onerror = () => console.log("file reading has failed");
-            reader.onload = () => {
-                // Do whatever you want with the file contents
+                reader.onabort = () => console.log("file reading was aborted");
+                reader.onerror = () => console.log("file reading has failed");
+                reader.onload = () => {
+                    // Do whatever you want with the file contents
 
-                const binaryStr = reader.result;
+                    let base64str = reader.result;
+                    const n = base64str.indexOf("base64,");
+                    base64str = base64str.substring(n + 7, base64str.length);
 
-                let data = EXIF.readFromBinaryFile(binaryStr);
-                console.log(data);
-            };
-            reader.readAsArrayBuffer(file);
-        });
+                    axios.post("https://localhost:5001/api/imageservice/test", {
+                        image: base64str
+                    });
+                };
+                reader.readAsDataURL(file);
+            });
+        }
     }, []);
 
     const { getRootProps, getInputProps, isDragActive } = useDropzone({
