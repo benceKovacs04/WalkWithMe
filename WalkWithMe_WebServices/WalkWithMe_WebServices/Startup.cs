@@ -8,11 +8,13 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+using WalkWithMe_ImageService.Model.DB;
 
 namespace WalkWithMe_WebServices
 {
@@ -49,23 +51,9 @@ namespace WalkWithMe_WebServices
                     ValidIssuer = Configuration.GetValue<string>("GateWayURL"),
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration.GetValue<string>("JWTSecretKey")))
                 };
-                options.Events = new JwtBearerEvents
-                {
-                    OnAuthenticationFailed = context =>
-                    {
-                        return Task.CompletedTask;
-                    },
-                    OnTokenValidated = context =>
-                    {
-                        return Task.CompletedTask;
-                    },
-                    OnChallenge = context =>
-                    {
-                        return Task.CompletedTask;
-                    }
-                    
-                };
             });
+
+            services.AddDbContext<ImageContext>(options => options.UseSqlServer(Configuration.GetConnectionString("WalkWithMeImageContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
