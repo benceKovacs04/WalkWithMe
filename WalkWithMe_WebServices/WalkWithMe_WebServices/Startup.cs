@@ -58,6 +58,7 @@ namespace WalkWithMe_WebServices
             services.AddDbContext<ImageContext>(options => options.UseSqlServer(Configuration.GetConnectionString("WalkWithMeImageContext")));
 
             services.AddScoped<ICloudService, CloudService>();
+            services.AddScoped<IImageService, ImageService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

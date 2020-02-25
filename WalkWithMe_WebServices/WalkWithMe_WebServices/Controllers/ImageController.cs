@@ -2,7 +2,6 @@
 using MetadataExtractor.Formats.Exif;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -10,7 +9,6 @@ using System.Data.Common;
 using System.IdentityModel.Tokens.Jwt;
 using System.IO;
 using System.Linq;
-using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using WalkWithMe_ImageService.Interfaces;
@@ -23,13 +21,16 @@ namespace WalkWithMe_ImageService.Controllers
     {
         private readonly IConfiguration _config;
         private readonly ImageContext _context;
-        private readonly ICloudService _imageUploader;
+        private readonly ICloudService _cloudService;
+        private readonly IImageService _imageService;
 
-        public ImageController(IConfiguration config, ImageContext context, ICloudService imageUploader)
+        public ImageController(IConfiguration config, ImageContext context, ICloudService cloudService, IImageService imageService)
         {
             _config = config;
             _context = context;
-            _imageUploader = imageUploader;
+            _cloudService = cloudService;
+            _imageService = imageService;
+           
         }
 
         [HttpPost]
@@ -50,19 +51,14 @@ namespace WalkWithMe_ImageService.Controllers
 
                 var imageBytes = Convert.FromBase64String(image["image"]);
 
-                var directories = ImageMetadataReader.ReadMetadata(new MemoryStream(imageBytes));
-                var subIfdDirectory = directories.OfType<GpsDirectory>().FirstOrDefault();
-                var latitude = subIfdDirectory?.GetDescription(GpsDirectory.TagLatitude);
-                var longitude = subIfdDirectory?.GetDescription(GpsDirectory.TagLongitude);
+                ImageModel imageModel = _imageService.CreateImageFromByteArray(imageBytes);
+                imageModel.UserId = userId;
 
-                Guid id = Guid.NewGuid();
-
-                ImageModel imageModel = new ImageModel() { ImageId = id.ToString(), UserId = userId, Latitude = latitude, Longitude = longitude };
                 try
                 {
                     var asd = await _context.Images.AddAsync(imageModel);
                     int result = await _context.SaveChangesAsync();
-                    bool uploadResult = await _imageUploader.UploadImageToStorage(new MemoryStream(imageBytes), id.ToString());
+                    bool uploadResult = await _cloudService.UploadImageToStorage(new MemoryStream(imageBytes), imageModel.ImageId);
                     Response.StatusCode = 200;
                 }
                 catch (DbException e)

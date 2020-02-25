@@ -19,13 +19,9 @@ namespace WalkWithMe_ImageService.Services
             string storageAccKey = Environment.GetEnvironmentVariable("Azure_Blob_Storage_Account_Key");
 
             StorageCredentials credentials = new StorageCredentials(accountName, storageAccKey);
-
             CloudStorageAccount account = new CloudStorageAccount(credentials, useHttps: true);
-
             CloudBlobClient client = account.CreateCloudBlobClient();
-
             CloudBlobContainer container = client.GetContainerReference("images");
-
             CloudBlockBlob blockBlob = container.GetBlockBlobReference(fileName);
 
             await blockBlob.UploadFromStreamAsync(file);
