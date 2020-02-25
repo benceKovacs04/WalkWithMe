@@ -21,7 +21,12 @@ namespace WalkWithMe_ImageService.Services
 
             Guid id = Guid.NewGuid();
 
-            ImageModel imageModel = new ImageModel() { ImageId = id.ToString(), Latitude = latitude, Longitude = longitude };
+            ImageModel imageModel = new ImageModel() { 
+                ImageId = id.ToString(), 
+                Latitude = latitude, 
+                Longitude = longitude, 
+                PostDate = DateTime.Now 
+            };
 
             return imageModel;
         }

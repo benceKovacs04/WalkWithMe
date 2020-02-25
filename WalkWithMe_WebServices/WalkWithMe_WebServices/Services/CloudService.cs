@@ -8,11 +8,25 @@ using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Auth;
 using Microsoft.WindowsAzure.Storage.Blob;
 using WalkWithMe_ImageService.Interfaces;
+using WalkWithMe_ImageService.Model.DB;
 
 namespace WalkWithMe_ImageService.Services
 {
     public class CloudService : ICloudService
     {
+
+        private readonly StorageCredentials _credentials;
+        private readonly CloudStorageAccount _account;
+        private readonly CloudBlobClient _client;
+        
+        public CloudService()
+        {
+            _credentials = new StorageCredentials(
+                Environment.GetEnvironmentVariable("Azure_Account"),
+                Environment.GetEnvironmentVariable("Azure_Blob_Storage_Account_Key")
+                );
+        }
+
         public async Task<bool> UploadImageToStorage(MemoryStream file, string fileName)
         {
             string accountName = Environment.GetEnvironmentVariable("Azure_Account");
@@ -27,6 +41,15 @@ namespace WalkWithMe_ImageService.Services
             await blockBlob.UploadFromStreamAsync(file);
 
             return await Task.FromResult(true);
+        }
+
+        public ImageModel GetImageFromStorage(string fileName)
+        {
+            
+
+
+
+
         }
     }
 }
