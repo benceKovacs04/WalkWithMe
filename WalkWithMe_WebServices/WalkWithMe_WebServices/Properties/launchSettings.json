@@ -1,5 +1,4 @@
-﻿{
-  "$schema": "http://json.schemastore.org/launchsettings.json",
+{
   "iisSettings": {
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
@@ -8,23 +7,22 @@
       "sslPort": 44300
     }
   },
+  "$schema": "http://json.schemastore.org/launchsettings.json",
   "profiles": {
     "IIS Express": {
       "commandName": "IISExpress",
-      "launchBrowser": false,
-      
       "environmentVariables": {
+        "Azure_Blob_Storage_Account_Key": "/80mcf3Huk4kqyLYWKX0x12oeBCURbusQ3CPvK95LEih1/I+PnuYfO55VZenvDbzioK674YnY6naRFFCamu6cw==",
+        "Azure_Account": "wwmblobstorage",
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
     "WalkWithMe_ImageService": {
       "commandName": "Project",
-      "launchBrowser": false,
-      
-      "applicationUrl": "https://localhost:5001;http://localhost:5000",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
-      }
+      },
+      "applicationUrl": "https://localhost:5001;http://localhost:5000"
     }
   }
 }

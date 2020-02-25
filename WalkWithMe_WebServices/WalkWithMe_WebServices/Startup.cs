@@ -14,7 +14,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+using WalkWithMe_ImageService.Interfaces;
 using WalkWithMe_ImageService.Model.DB;
+using WalkWithMe_ImageService.Services;
 
 namespace WalkWithMe_WebServices
 {
@@ -54,6 +56,8 @@ namespace WalkWithMe_WebServices
             });
 
             services.AddDbContext<ImageContext>(options => options.UseSqlServer(Configuration.GetConnectionString("WalkWithMeImageContext")));
+
+            services.AddScoped<IImageUploader, ImageUploader>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

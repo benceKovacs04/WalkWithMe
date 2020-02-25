@@ -13,6 +13,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using WalkWithMe_ImageService.Interfaces;
 using WalkWithMe_ImageService.Model.DB;
 
 namespace WalkWithMe_ImageService.Controllers
@@ -22,11 +23,13 @@ namespace WalkWithMe_ImageService.Controllers
     {
         private readonly IConfiguration _config;
         private readonly ImageContext _context;
+        private readonly IImageUploader _imageUploader;
 
-        public ImageController(IConfiguration config, ImageContext context)
+        public ImageController(IConfiguration config, ImageContext context, IImageUploader imageUploader)
         {
             _config = config;
             _context = context;
+            _imageUploader = imageUploader;
         }
 
         [HttpPost]
@@ -59,13 +62,14 @@ namespace WalkWithMe_ImageService.Controllers
                 {
                     var asd = await _context.Images.AddAsync(imageModel);
                     int result = await _context.SaveChangesAsync();
+                    bool uploadResult = await _imageUploader.UploadImageToStorage(new MemoryStream(imageBytes), id.ToString());
                     Response.StatusCode = 200;
                 }
                 catch (DbException e)
                 {
                     Response.StatusCode = 400;
                     Response.ContentType = "application/json";
-                    await Response.Body.WriteAsync(Encoding.UTF8.GetBytes(e));
+                    await Response.Body.WriteAsync(Encoding.UTF8.GetBytes(e.ToString()));
                 }
             }
             else
