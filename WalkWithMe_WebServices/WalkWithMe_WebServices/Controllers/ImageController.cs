@@ -23,9 +23,9 @@ namespace WalkWithMe_ImageService.Controllers
     {
         private readonly IConfiguration _config;
         private readonly ImageContext _context;
-        private readonly IImageUploader _imageUploader;
+        private readonly ICloudService _imageUploader;
 
-        public ImageController(IConfiguration config, ImageContext context, IImageUploader imageUploader)
+        public ImageController(IConfiguration config, ImageContext context, ICloudService imageUploader)
         {
             _config = config;
             _context = context;

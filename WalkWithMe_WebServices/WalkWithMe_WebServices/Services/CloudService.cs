@@ -11,7 +11,7 @@ using WalkWithMe_ImageService.Interfaces;
 
 namespace WalkWithMe_ImageService.Services
 {
-    public class ImageUploader : IImageUploader
+    public class CloudService : ICloudService
     {
         public async Task<bool> UploadImageToStorage(MemoryStream file, string fileName)
         {

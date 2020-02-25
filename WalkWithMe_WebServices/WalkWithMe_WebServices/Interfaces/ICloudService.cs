@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace WalkWithMe_ImageService.Interfaces
 {
-    public interface IImageUploader
+    public interface ICloudService
     {
         Task<bool> UploadImageToStorage(MemoryStream file, string fileName);
     }
