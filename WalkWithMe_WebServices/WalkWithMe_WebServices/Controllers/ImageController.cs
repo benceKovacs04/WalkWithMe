@@ -73,5 +73,14 @@ namespace WalkWithMe_ImageService.Controllers
                 Response.StatusCode = 401;
             }
         }
+
+        [HttpGet]
+        [Route("api/imageservice/getimage")]
+        public async void TestGet()
+        {
+            string fileName = "af25b211-bc35-4415-b9ce-5aaaa24a5fda";
+            MemoryStream imageStream = await _cloudService.GetImageFromStorage(fileName);
+            int x = 5;
+        }
     }
 }
