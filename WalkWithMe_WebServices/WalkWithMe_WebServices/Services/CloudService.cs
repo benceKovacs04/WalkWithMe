@@ -25,17 +25,13 @@ namespace WalkWithMe_ImageService.Services
                 Environment.GetEnvironmentVariable("Azure_Account"),
                 Environment.GetEnvironmentVariable("Azure_Blob_Storage_Account_Key")
                 );
+            _account = new CloudStorageAccount(_credentials, useHttps: true);
+            _client = _account.CreateCloudBlobClient();
         }
 
         public async Task<bool> UploadImageToStorage(MemoryStream file, string fileName)
         {
-            string accountName = Environment.GetEnvironmentVariable("Azure_Account");
-            string storageAccKey = Environment.GetEnvironmentVariable("Azure_Blob_Storage_Account_Key");
-
-            StorageCredentials credentials = new StorageCredentials(accountName, storageAccKey);
-            CloudStorageAccount account = new CloudStorageAccount(credentials, useHttps: true);
-            CloudBlobClient client = account.CreateCloudBlobClient();
-            CloudBlobContainer container = client.GetContainerReference("images");
+            CloudBlobContainer container = _client.GetContainerReference("images");
             CloudBlockBlob blockBlob = container.GetBlockBlobReference(fileName);
 
             await blockBlob.UploadFromStreamAsync(file);
@@ -43,13 +39,17 @@ namespace WalkWithMe_ImageService.Services
             return await Task.FromResult(true);
         }
 
-        public ImageModel GetImageFromStorage(string fileName)
+        public async Task<MemoryStream> GetImageFromStorage(string fileName)
         {
+
+            CloudBlobContainer container = _client.GetContainerReference("images");
+            CloudBlockBlob blockBlob = container.GetBlockBlobReference(fileName);
+
+            MemoryStream imageStream = new MemoryStream();
+            await blockBlob.DownloadToStreamAsync(imageStream);
+
+            return imageStream;
             
-
-
-
-
         }
     }
 }
