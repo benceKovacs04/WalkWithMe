@@ -67,13 +67,11 @@ namespace WalkWithMe_ImageService.Controllers
                     Response.ContentType = "application/json";
                     await Response.Body.WriteAsync(Encoding.UTF8.GetBytes(e));
                 }
-                
-                
-                
-
             }
-
-            
+            else
+            {
+                Response.StatusCode = 401;
+            }
         }
     }
 }
