@@ -6,10 +6,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.IdentityModel.Tokens.Jwt;
 using System.IO;
 using System.Linq;
 using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 using WalkWithMe_ImageService.Model.DB;
 
@@ -56,14 +58,18 @@ namespace WalkWithMe_ImageService.Controllers
                 try
                 {
                     var asd = await _context.Images.AddAsync(imageModel);
+                    int result = await _context.SaveChangesAsync();
+                    Response.StatusCode = 200;
                 }
-                catch (Exception e)
+                catch (DbException e)
                 {
-                    int b = 5;
+                    Response.StatusCode = 400;
+                    Response.ContentType = "application/json";
+                    await Response.Body.WriteAsync(Encoding.UTF8.GetBytes(e));
                 }
                 
                 
-                int result = await _context.SaveChangesAsync();
+                
 
             }
 
