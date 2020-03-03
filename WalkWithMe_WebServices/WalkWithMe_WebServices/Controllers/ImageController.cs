@@ -74,13 +74,23 @@ namespace WalkWithMe_ImageService.Controllers
             }
         }
 
-        [HttpGet]
+        /*[HttpGet]
         [Route("api/imageservice/getimage")]
-        public async void TestGet()
+        public async Task GetImage()
         {
-            string fileName = "af25b211-bc35-4415-b9ce-5aaaa24a5fda";
-            MemoryStream imageStream = await _cloudService.GetImageFromStorage(fileName);
-            int x = 5;
-        }
+            string fileName = Request.Query["FileName"];
+            byte[] imageBytes;
+
+            using (var imageStream = new MemoryStream())
+            {
+                imageStream.CopyTo(await _cloudService.GetImageFromStorage(fileName));
+                imageBytes = imageStream.ToArray();
+            }
+            string imageBase64 = Convert.ToBase64String(imageBytes);
+
+            Response.
+
+
+        }*/
     }
 }
