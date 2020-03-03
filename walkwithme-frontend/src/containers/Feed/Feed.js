@@ -15,7 +15,7 @@ export default function Feed() {
             <div className={"col-6"}>
                 <FeedItem
                     title="image one"
-                    url="https://i.imgur.com/uQFZYcE.jpg"
+                    url="https://localhost:5001/api/imageservice/getimage?FileName=e15464b0-0f16-4254-9c6a-4414ce3372e1"
                 />
                 <FeedItem
                     title="image two"

@@ -90,23 +90,16 @@ namespace WalkWithMe_ImageService.Controllers
             }
         }
     
-        /*[HttpGet]
+        [HttpGet]
         [Route("api/imageservice/getimage")]
-        public async Task GetImage()
+        public async Task<IActionResult> GetImage()
         {
             string fileName = Request.Query["FileName"];
-            byte[] imageBytes;
+            byte[] imageBytes = (await _cloudService.GetImageFromStorage(fileName)).ToArray();
 
-            using (var imageStream = new MemoryStream())
-            {
-                imageStream.CopyTo(await _cloudService.GetImageFromStorage(fileName));
-                imageBytes = imageStream.ToArray();
-            }
-            string imageBase64 = Convert.ToBase64String(imageBytes);
-
-            Response.
+            return File(imageBytes, "image/jpeg");
 
 
-        }*/
+        }
     }
 }
