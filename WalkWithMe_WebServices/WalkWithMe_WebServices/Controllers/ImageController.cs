@@ -30,14 +30,16 @@ namespace WalkWithMe_ImageService.Controllers
             _context = context;
             _cloudService = cloudService;
             _imageService = imageService;
-           
+
         }
 
         [HttpPost]
         [Authorize]
         [Route("api/imageservice/uploadimage")]
-        public async Task UploadImage([FromBody] IDictionary<string, string> image)
+        public async Task UploadImage()
         {
+            // [FromBody] IDictionary<string, string> image
+
             var headers = Request.Headers;
 
             if (headers.ContainsKey("Authorization"))
@@ -49,23 +51,38 @@ namespace WalkWithMe_ImageService.Controllers
                 var token = handler.ReadJwtToken(encryptedToken);
                 var userId = token.Claims.First(x => x.Type == "sub").Value;
 
-                var imageBytes = Convert.FromBase64String(image["image"]);
+                var image = Request.Form.Files[0];
 
-                ImageModel imageModel = _imageService.CreateImageFromByteArray(imageBytes);
-                imageModel.UserId = userId;
-
-                try
+                if (image != null)
                 {
-                    var asd = await _context.Images.AddAsync(imageModel);
-                    int result = await _context.SaveChangesAsync();
-                    bool uploadResult = await _cloudService.UploadImageToStorage(new MemoryStream(imageBytes), imageModel.ImageId);
-                    Response.StatusCode = 200;
+                    string fileExtension = image.ContentType.Substring(6);
+                    byte[] imageBytes;
+
+                    using (var ms = new MemoryStream())
+                    {
+                        image.CopyTo(ms);
+                        imageBytes = ms.ToArray();
+                    }
+                    ImageModel imageModel = _imageService.CreateImageFromByteArray(imageBytes);
+                    imageModel.UserId = userId;
+
+                    try
+                    {
+                        await _context.Images.AddAsync(imageModel);
+                        await _context.SaveChangesAsync();
+                        await _cloudService.UploadImageToStorage(new MemoryStream(imageBytes), imageModel.ImageId + '.' + fileExtension);
+                        Response.StatusCode = 200;
+                    }
+                    catch (DbException e)
+                    {
+                        Response.StatusCode = 400;
+                        Response.ContentType = "application/json";
+                        await Response.Body.WriteAsync(Encoding.UTF8.GetBytes(e.ToString()));
+                    }
                 }
-                catch (DbException e)
+                else
                 {
                     Response.StatusCode = 400;
-                    Response.ContentType = "application/json";
-                    await Response.Body.WriteAsync(Encoding.UTF8.GetBytes(e.ToString()));
                 }
             }
             else
@@ -73,7 +90,7 @@ namespace WalkWithMe_ImageService.Controllers
                 Response.StatusCode = 401;
             }
         }
-
+    
         /*[HttpGet]
         [Route("api/imageservice/getimage")]
         public async Task GetImage()

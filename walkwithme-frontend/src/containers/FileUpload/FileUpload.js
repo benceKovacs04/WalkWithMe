@@ -8,24 +8,18 @@ export default function FileUpload() {
     const onDrop = useCallback(acceptedFiles => {
         {
             acceptedFiles.forEach(file => {
-                const reader = new FileReader();
-
-                reader.onabort = () => console.log("file reading was aborted");
-                reader.onerror = () => console.log("file reading has failed");
-                reader.onload = () => {
-                    let base64str = reader.result;
-                    const n = base64str.indexOf("base64,");
-                    base64str = base64str.substring(n + 7, base64str.length);
-
-                    axios.post(
-                        "https://localhost:5001/api/imageservice/uploadimage",
-                        {
-                            image: base64str
-                        },
-                        { withCredentials: true }
-                    );
-                };
-                reader.readAsDataURL(file);
+                const formData = new FormData();
+                formData.append("image", file);
+                axios.post(
+                    "https://localhost:5001/api/imageservice/uploadimage",
+                    formData,
+                    {
+                        withCredentials: true,
+                        headers: {
+                            "Content-Type": "multipart/form-data"
+                        }
+                    }
+                );
             });
         }
     }, []);
