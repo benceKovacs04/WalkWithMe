@@ -55,7 +55,6 @@ namespace WalkWithMe_ImageService.Controllers
 
                 if (image != null)
                 {
-                    string fileExtension = image.ContentType.Substring(6);
                     byte[] imageBytes;
 
                     using (var ms = new MemoryStream())
@@ -70,7 +69,7 @@ namespace WalkWithMe_ImageService.Controllers
                     {
                         await _context.Images.AddAsync(imageModel);
                         await _context.SaveChangesAsync();
-                        await _cloudService.UploadImageToStorage(new MemoryStream(imageBytes), imageModel.ImageId + '.' + fileExtension);
+                        await _cloudService.UploadImageToStorage(new MemoryStream(imageBytes), imageModel.ImageId);
                         Response.StatusCode = 200;
                     }
                     catch (DbException e)
