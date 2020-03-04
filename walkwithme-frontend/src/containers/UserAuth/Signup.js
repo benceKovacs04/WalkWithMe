@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Button from "../../components/UI/Button/Button";
-import classes from "./Signup.module.css";
+import classes from "./Auth.module.css";
 import axios from "axios";
 
 export default function Signup(props) {
@@ -8,6 +8,7 @@ export default function Signup(props) {
     const [passwordOne, changePasswordOne] = useState();
     const [passwordTwo, changePasswordTwo] = useState();
     const [email, changeEmail] = useState();
+    const [loading, changeLoading] = useState(null);
 
     const setUsername = e => {
         changeUserName(e.target.value);
@@ -43,45 +44,49 @@ export default function Signup(props) {
     };
 
     return (
-        <div className={classes.Signup}>
-            <div>
-                <label for="username">Username</label>
-                <input
-                    required
-                    type="text"
-                    id="username"
-                    onChange={setUsername}
-                ></input>
-            </div>
-            <div>
-                <label for="passwordOne">Password</label>
-                <input
-                    type="password"
-                    id="passwordOne"
-                    onChange={setPasswordOne}
-                    required
-                ></input>
-            </div>
-            <div>
-                <label for="passwordTwo">Password again</label>
-                <input
-                    type="password"
-                    id="passwordTwo"
-                    onChange={setPasswordTwo}
-                    required
-                ></input>
-            </div>
-            <div>
-                <label for="email">Email Address</label>
-                <input
-                    required
-                    type="text"
-                    id="email"
-                    onChange={setEmail}
-                ></input>
-            </div>
-            <div>
-                <Button click={signUp} buttonText="Sign Up!"></Button>
+        <div className={classes.bodyBackground}>
+            <div className={classes.grad}>
+                <div className={classes.header}>
+                    <div>
+                        Walk<span>With</span>Me
+                    </div>
+                </div>
+                <br></br>
+                <div className={classes.login}>
+                    <input
+                        type="text"
+                        placeholder="Username"
+                        name="user"
+                        onChange={setUsername}
+                    />
+                    <br></br>
+                    <input
+                        type="text"
+                        placeholder="E-mail address"
+                        name="user"
+                        onChange={setEmail}
+                    />
+                    <br></br>
+                    <input
+                        onChange={setPasswordOne}
+                        type="password"
+                        placeholder="Password"
+                        name="password"
+                    />
+                    <br></br>
+                    <input
+                        onChange={setPasswordTwo}
+                        type="password"
+                        placeholder="Password again"
+                        name="passwordTwo"
+                    />
+                    <br></br>
+                    <input onClick={signUp} type="button" value="Sign up!" />
+                    <button onClick={() => (window.location = "/")}>
+                        Home
+                    </button>
+                    <h3>{loading}</h3>
+                </div>
             </div>
         </div>
     );

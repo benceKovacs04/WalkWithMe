@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import classes from "./Login.module.css";
+import classes from "./Auth.module.css";
 import axios from "axios";
 import loggedInContext from "../../context/LoggedInContext";
 
@@ -65,6 +65,9 @@ export default function Login(props) {
                     />
                     <br></br>
                     <input onClick={loginClick} type="button" value="Login" />
+                    <button onClick={() => (window.location = "/")}>
+                        Home
+                    </button>
                     <h3>{loading}</h3>
                 </div>
             </div>

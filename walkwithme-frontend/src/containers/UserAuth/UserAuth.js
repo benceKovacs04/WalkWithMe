@@ -43,22 +43,18 @@ export default function UserAuth() {
 
     return (
         <Fragment>
-            <Modal show={isModalShowing} click={toggleModalShowing}>
-                {modalContent === "login" ? (
-                    <Login
-                        toggleLoggedIn={toggleLoggedIn}
-                        closeModal={toggleModalShowing}
-                    />
-                ) : (
-                    <SignUp closeModal={toggleModalShowing} />
-                )}
-            </Modal>
             {loggedIn ? (
                 <Button click={logOut} buttonText="Log out" />
             ) : (
                 <span>
-                    <Button click={logIn} buttonText="Log in" />
-                    <Button click={signUp} buttonText="Sign up!" />
+                    <Button
+                        click={() => (window.location = "/login")}
+                        buttonText="Log in"
+                    />
+                    <Button
+                        click={() => (window.location = "/signup")}
+                        buttonText="Sign up!"
+                    />
                 </span>
             )}
         </Fragment>
