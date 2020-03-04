@@ -35,27 +35,25 @@ export default function Login(props) {
     };
 
     return (
-        <div className={classes.Login}>
-            <div>
-                <label for="username">Username</label>
-            </div>
-            <div>
-                <input
-                    type="text"
-                    id="username"
-                    onChange={userNameSetter}
-                ></input>
-            </div>
-            <div>
-                <label for="password">Password</label>
-            </div>
-            <input
-                type="password"
-                id="Password"
-                onChange={passwordSetter}
-            ></input>
-            <div>
-                <Button click={loginClick} buttonText="Log in"></Button>
+        <div className={classes.bodyBackground}>
+            <div className={classes.grad}>
+                <div className={classes.header}>
+                    <div>
+                        Walk<span>With</span>Me
+                    </div>
+                </div>
+                <br></br>
+                <div className={classes.login}>
+                    <input type="text" placeholder="username" name="user" />
+                    <br></br>
+                    <input
+                        type="password"
+                        placeholder="password"
+                        name="password"
+                    />
+                    <br></br>
+                    <input type="button" value="Login" />
+                </div>
             </div>
         </div>
     );
