@@ -27,8 +27,8 @@ export default function Signup(props) {
     };
 
     const signUp = () => {
-        props.closeModal();
         if (passwordOne === passwordTwo) {
+            changeLoading("Please wait");
             axios
                 .post("https://localhost:5001/api/userservice/signup", {
                     username: username,
@@ -37,9 +37,16 @@ export default function Signup(props) {
                 })
                 .then(resp => {
                     if (resp.status === 200) {
-                        alert("Click the link in the email");
+                        changeLoading(
+                            "Registration successful! Please click the activation link in the e-mail we sent you!"
+                        );
                     }
+                })
+                .catch(error => {
+                    changeLoading("Username already taken");
                 });
+        } else {
+            changeLoading("Passwords don't match");
         }
     };
 
