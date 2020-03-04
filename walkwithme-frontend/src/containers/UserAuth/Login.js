@@ -1,13 +1,17 @@
-import React, { Fragment, useState } from "react";
+import React, { useState, useContext } from "react";
 import classes from "./Login.module.css";
-import Button from "../../components/UI/Button/Button";
 import axios from "axios";
+import loggedInContext from "../../context/LoggedInContext";
 
 export default function Login(props) {
     const [username, changeUsername] = useState(null);
     const [password, changePassword] = useState(null);
+    const [loading, changeLoading] = useState(null);
+
+    const { toggleLoggedIn } = useContext(loggedInContext);
 
     const loginClick = () => {
+        changeLoading("Please wait");
         axios
             .post(
                 "https://localhost:5001/api/userservice/login",
@@ -18,12 +22,14 @@ export default function Login(props) {
                 { withCredentials: true }
             )
             .then(resp => {
-                if (resp.status === 200) {
-                    props.toggleLoggedIn();
-                }
+                toggleLoggedIn();
+                window.location = "/";
             })
-            .then(props.closeModal());
-        // props.login();
+            .catch(error => {
+                if (error.response.status === 401) {
+                    changeLoading("Invalid username or password");
+                }
+            });
     };
 
     const userNameSetter = e => {
@@ -44,15 +50,22 @@ export default function Login(props) {
                 </div>
                 <br></br>
                 <div className={classes.login}>
-                    <input type="text" placeholder="username" name="user" />
+                    <input
+                        type="text"
+                        placeholder="username"
+                        name="user"
+                        onChange={userNameSetter}
+                    />
                     <br></br>
                     <input
+                        onChange={passwordSetter}
                         type="password"
                         placeholder="password"
                         name="password"
                     />
                     <br></br>
-                    <input type="button" value="Login" />
+                    <input onClick={loginClick} type="button" value="Login" />
+                    <h3>{loading}</h3>
                 </div>
             </div>
         </div>
