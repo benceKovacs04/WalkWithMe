@@ -62,14 +62,14 @@ export default function Signup(props) {
                 <div className={classes.login}>
                     <input
                         type="text"
-                        placeholder="Username"
+                        placeholder="username"
                         name="user"
                         onChange={setUsername}
                     />
                     <br></br>
                     <input
                         type="text"
-                        placeholder="E-mail address"
+                        placeholder="e-mail address"
                         name="user"
                         onChange={setEmail}
                     />
@@ -77,14 +77,14 @@ export default function Signup(props) {
                     <input
                         onChange={setPasswordOne}
                         type="password"
-                        placeholder="Password"
+                        placeholder="password"
                         name="password"
                     />
                     <br></br>
                     <input
                         onChange={setPasswordTwo}
                         type="password"
-                        placeholder="Password again"
+                        placeholder="password again"
                         name="passwordTwo"
                     />
                     <br></br>

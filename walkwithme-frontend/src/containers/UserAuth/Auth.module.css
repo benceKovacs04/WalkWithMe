@@ -1,9 +1,9 @@
-@import url(https://fonts.googleapis.com/css?family=Exo:100, 200, 400);
+/*@import url(https://fonts.googleapis.com/css?family=Exo:100, 200, 400);
 @import url(
     https://fonts.googleapis.com/css?family=Source+Sans+Pro:700,
     400,
     300
-);
+);*/
 
 body {
     margin: 0;
@@ -68,7 +68,8 @@ body {
 
 .login {
     position: absolute;
-    top: calc(50% - 75px);
+    /* top: calc(50% - 75px); */
+    top: 35%;
     left: calc(50% - 50px);
     height: 150px;
     width: 350px;
@@ -134,15 +135,18 @@ body {
     margin-top: 10px;
 }
 
-.login input[type="button"]:hover {
+.login input[type="button"]:hover,
+.login button:hover {
     opacity: 0.8;
 }
 
-.login input[type="button"]:active {
+.login input[type="button"]:active,
+.login button:active {
     opacity: 0.6;
 }
 
-.login input[type="text"]:focus {
+.login input[type="text"]:focus,
+.login button:focus {
     outline: none;
     border: 1px solid rgba(255, 255, 255, 0.9);
 }
