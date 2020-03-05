@@ -10,7 +10,8 @@ export default function Feed() {
     return (
         <div className={"row"}>
             <div className={"col-3 left-col"}>
-                {loggedIn ? <FileUpload></FileUpload> : null}
+                {/*}   {loggedIn ? <FileUpload></FileUpload> : null} */}
+                <FileUpload></FileUpload>
             </div>
             <div className={"col-6"}>
                 <FeedItem
