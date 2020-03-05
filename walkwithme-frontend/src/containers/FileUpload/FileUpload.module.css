@@ -1,10 +1,50 @@
 .Upload {
-    border: 2px dashed black;
+    display: block;
+    border: 2px dashed white;
     text-align: center;
     height: 100px;
     line-height: 90px;
+    color: white;
+}
+
+.Upload img {
+    max-width: 100%;
+    margin-top: 15px;
+    image-orientation: from-image;
+    overflow: hidden;
+}
+
+.Upload p {
+    margin-bottom: 0;
 }
 
 .Upload:hover {
     cursor: pointer;
+}
+
+.Upload input[type="text"] {
+    width: 250px;
+    height: 30px;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 2px;
+    color: #fff;
+    font-family: "Exo", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    padding: 4px;
+    margin-top: 5px;
+    width: 100%;
+}
+
+.rotate90 {
+    transform: rotate(90deg);
+}
+
+.rotate180 {
+    transform: rotate(180deg);
+}
+
+.rotate270 {
+    transform: rotate(270deg);
 }

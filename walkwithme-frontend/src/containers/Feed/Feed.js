@@ -8,8 +8,8 @@ export default function Feed() {
     const { loggedIn } = useContext(LoggedInContext);
 
     return (
-        <div className={"row"}>
-            <div className={"col-3 left-col"}>
+        <div className={classes.Feed + " row"}>
+            <div className={classes.leftCol + " col-3"}>
                 {/*}   {loggedIn ? <FileUpload></FileUpload> : null} */}
                 <FileUpload></FileUpload>
             </div>
