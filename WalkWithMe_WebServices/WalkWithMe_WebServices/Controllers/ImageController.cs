@@ -52,6 +52,7 @@ namespace WalkWithMe_ImageService.Controllers
                 var userId = token.Claims.First(x => x.Type == "sub").Value;
 
                 var image = Request.Form.Files[0];
+                var title = Request.Form.Files[1];
 
                 if (image != null)
                 {
