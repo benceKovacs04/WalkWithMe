@@ -72,6 +72,18 @@
       ],
       "UpstreamPathTemplate": "/api/imageservice/getimage",
       "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/imageservice/getimagedetails",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44300
+        }
+      ],
+      "UpstreamPathTemplate": "/api/imageservice/getimagedetails",
+      "UpstreamHttpMethod": [ "GET" ]
     }
 
   ],

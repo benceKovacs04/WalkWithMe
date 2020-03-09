@@ -91,6 +91,14 @@ namespace WalkWithMe_ImageService.Controllers
                 Response.StatusCode = 401;
             }
         }
+
+        [HttpGet]
+        [Route("/api/imageservice/getimagedetails")]
+        public IActionResult GetImageIds()
+        {
+            var imgList = _context.Images.ToList();
+            return new OkObjectResult(imgList);
+        }
     
         [HttpGet]
         [Route("api/imageservice/getimage")]
