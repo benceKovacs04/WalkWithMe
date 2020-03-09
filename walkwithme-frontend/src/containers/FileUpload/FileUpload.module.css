@@ -1,4 +1,9 @@
-.Upload {
+.Actions {
+    justify-content: space-between;
+    display: flex;
+}
+
+.Drag {
     display: block;
     border: 2px dashed white;
     text-align: center;
@@ -10,15 +15,13 @@
 .Upload img {
     max-width: 100%;
     margin-top: 15px;
-    image-orientation: from-image;
-    overflow: hidden;
 }
 
 .Upload p {
     margin-bottom: 0;
 }
 
-.Upload:hover {
+.Drag:hover {
     cursor: pointer;
 }
 
@@ -35,6 +38,38 @@
     padding: 4px;
     margin-top: 5px;
     width: 100%;
+}
+
+.Upload button {
+    width: 45%;
+    height: 35px;
+    background: #fff;
+    border: 1px solid #fff;
+    cursor: pointer;
+    border-radius: 2px;
+    color: #a18d6c;
+    font-family: "Exo", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    padding: 6px;
+    margin-top: 10px;
+}
+
+.Upload button:hover {
+    opacity: 0.8;
+}
+
+.Upload button:active {
+    opacity: 0.6;
+}
+
+.Upload button:focus {
+    outline: none;
+    border: 1px solid rgba(255, 255, 255, 0.9);
+}
+
+.Upload button:focus {
+    outline: none;
 }
 
 .rotate90 {

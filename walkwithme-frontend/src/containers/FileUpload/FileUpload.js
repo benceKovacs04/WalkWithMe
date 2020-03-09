@@ -8,7 +8,6 @@ export default function FileUpload() {
     const [image, setImage] = useState(null);
     const [preview, setPreview] = useState(null);
     const [orientation, setOrientation] = useState(null);
-    const [rotation, setRotation] = useState(null);
 
     const upload = () => {
         const formData = new FormData();
@@ -63,7 +62,7 @@ export default function FileUpload() {
 
     return (
         <div className={classes.Upload}>
-            <div {...getRootProps()}>
+            <div className={classes.Drag} {...getRootProps()}>
                 <input {...getInputProps()} />
                 {isDragActive ? (
                     <p>Drop the files here ...</p>
@@ -77,6 +76,10 @@ export default function FileUpload() {
                 <img className={rotateImageClass()} src={preview} />
             ) : null}
             {preview ? <input type="text" placeholder="Title"></input> : null}
+            <div className={classes.Actions}>
+                {preview ? <button>Upload!</button> : null}
+                {preview ? <button>Cancel</button> : null}
+            </div>
         </div>
     );
 }
