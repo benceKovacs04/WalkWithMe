@@ -52,7 +52,7 @@ namespace WalkWithMe_ImageService.Controllers
                 var userId = token.Claims.First(x => x.Type == "sub").Value;
 
                 var image = Request.Form.Files[0];
-                var title = Request.Form.Files[1];
+                var title = Request.Form["title"];
 
                 if (image != null)
                 {
@@ -65,6 +65,7 @@ namespace WalkWithMe_ImageService.Controllers
                     }
                     ImageModel imageModel = _imageService.CreateImageFromByteArray(imageBytes);
                     imageModel.UserId = userId;
+                    imageModel.Title = title;
 
                     try
                     {

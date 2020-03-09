@@ -15,5 +15,6 @@ namespace WalkWithMe_ImageService.Model.DB
         public string Latitude { get; set; }
         public DateTime PostDate { get; set; }
         public int Points { get; set; }
+        public string Title { get; set; }
     }
 }
