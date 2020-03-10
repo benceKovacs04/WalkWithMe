@@ -16,8 +16,18 @@ namespace WalkWithMe_ImageService.Services
         {
             var directories = ImageMetadataReader.ReadMetadata(new MemoryStream(bytes));
             var subIfdDirectory = directories.OfType<GpsDirectory>().FirstOrDefault();
-            var latitude = subIfdDirectory?.GetDescription(GpsDirectory.TagLatitude);
-            var longitude = subIfdDirectory?.GetDescription(GpsDirectory.TagLongitude);
+            var latitudeDeg = subIfdDirectory?.GetDescription(GpsDirectory.TagLatitude);
+            var longitudeDeg = subIfdDirectory?.GetDescription(GpsDirectory.TagLongitude);
+
+            string latitude = null;
+            string longitude = null;
+
+
+            if(latitudeDeg != null && longitudeDeg != null)
+            {
+                latitude = ConvertToDecimal(latitudeDeg);
+                longitude = ConvertToDecimal(longitudeDeg);
+            }
 
             Guid id = Guid.NewGuid();
 
@@ -29,6 +39,19 @@ namespace WalkWithMe_ImageService.Services
             };
 
             return imageModel;
+        }
+
+        private string ConvertToDecimal(string coord)
+        {
+            coord = coord.Replace("°", "").Replace("'", "").Replace("\"", "");
+            string[] coords = coord.Split(null);
+
+            decimal decimalCoord = Convert.ToDecimal(coords[0]);
+            decimalCoord += Convert.ToDecimal(coords[1]) / 60;
+            decimalCoord += Convert.ToDecimal(coords[2]) / 3600;
+
+
+            return Math.Round(decimalCoord, 8).ToString();
         }
     }
 }

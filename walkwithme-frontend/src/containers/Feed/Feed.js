@@ -31,14 +31,22 @@ export default function Feed() {
                     {loggedIn ? <FileUpload></FileUpload> : null}
                 </div>
                 <div className={"col-6"}>
-                    {imageDetails.map(image => {
+                    {/*} {imageDetails.map(image => {
                         return (
                             <FeedItem
                                 title={image.title}
                                 url={getImageBaseUrl + image.imageId}
                             />
                         );
-                    })}
+                    })} */}
+                    <FeedItem
+                        title="title"
+                        url="https://i.imgur.com/CopGoAS.jpg"
+                    />
+                    <FeedItem
+                        title="title"
+                        url="https://i.imgur.com/CopGoAS.jpg"
+                    />
                 </div>
                 <div className={"col-3"}></div>
             </div>
