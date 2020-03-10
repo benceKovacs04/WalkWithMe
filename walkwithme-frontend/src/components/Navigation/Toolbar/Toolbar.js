@@ -4,8 +4,9 @@ import UserAuth from "../../../containers/UserAuth/UserAuth";
 
 const toolbar = props => (
     <header className={classes.Toolbar}>
-        <div>LOGO</div>
-        <div>Search bar</div>
+        <div className={classes.logo}>
+            Walk<span>With</span>Me
+        </div>
         <div>
             <UserAuth />
         </div>

@@ -1,9 +1,16 @@
 .ItemContainer {
-    border: 2px solid black;
     width: auto;
     margin: auto;
     justify-content: center;
-    margin-bottom: 16px;
+    margin-bottom: 24px;
+    background-color: lightslategrey;
+    -webkit-box-shadow: 17px 18px 18px 3px rgba(36, 36, 36, 1);
+    -moz-box-shadow: 17px 18px 18px 3px rgba(36, 36, 36, 1);
+    box-shadow: 17px 18px 18px 3px rgba(36, 36, 36, 1);
+    border-radius: 42px 42px 42px 42px;
+    -moz-border-radius: 42px 42px 42px 42px;
+    -webkit-border-radius: 42px 42px 42px 42px;
+    border: 0px solid #000000;
 }
 
 .FeedItem {
@@ -17,6 +24,7 @@
 }
 
 .FeedItemTitle {
-    padding-top: 5px;
+    padding-top: 10px;
     padding-bottom: 5px;
+    padding-left: 25px;
 }

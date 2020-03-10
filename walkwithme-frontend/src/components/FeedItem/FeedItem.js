@@ -1,6 +1,5 @@
 import React from "react";
 import classes from "./FeedItem.module.css";
-import Aux from "../../hoc/Auxiliary";
 
 const feedItem = props => (
     <div className={classes.ItemContainer}>

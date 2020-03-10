@@ -25,21 +25,23 @@ export default function Feed() {
     }, []);
 
     return (
-        <div className={classes.Feed + " row"}>
-            <div className={classes.leftCol + " col-3"}>
-                {loggedIn ? <FileUpload></FileUpload> : null}
+        <div className={classes.Background}>
+            <div className={classes.Feed + " row"}>
+                <div className={classes.leftCol + " col-3"}>
+                    {loggedIn ? <FileUpload></FileUpload> : null}
+                </div>
+                <div className={"col-6"}>
+                    {imageDetails.map(image => {
+                        return (
+                            <FeedItem
+                                title={image.title}
+                                url={getImageBaseUrl + image.imageId}
+                            />
+                        );
+                    })}
+                </div>
+                <div className={"col-3"}></div>
             </div>
-            <div className={"col-6"}>
-                {imageDetails.map(image => {
-                    return (
-                        <FeedItem
-                            title={image.title}
-                            url={getImageBaseUrl + image.imageId}
-                        />
-                    );
-                })}
-            </div>
-            <div className={"col-3"}></div>
         </div>
     );
 }

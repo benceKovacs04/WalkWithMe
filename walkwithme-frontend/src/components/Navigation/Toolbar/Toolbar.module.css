@@ -17,3 +17,15 @@
 .Toolbar nav {
     height: 100%;
 }
+
+.logo {
+    float: left;
+    color: #fff;
+    font-family: "Exo", sans-serif;
+    font-size: 35px;
+    font-weight: 200;
+}
+
+.logo span {
+    color: #5379fa !important;
+}
