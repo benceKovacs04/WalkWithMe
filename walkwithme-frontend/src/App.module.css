@@ -1,8 +1,11 @@
 body {
-    background: rgb(39, 44, 80);
+    /* background: rgb(39, 44, 80);
     background: radial-gradient(
         circle,
         rgba(39, 44, 80, 1) 0%,
         rgba(14, 53, 93, 1) 100%
     );
+    background-image: url(https://c.pxhere.com/photos/63/a2/abstract_background_blur_building_center_city_cityscape_dallas-911380.jpg!d); */
+    background-image: url(https://wallpaperstock.net/blurred-nature-scenery_wallpapers_35218_1920x1080.jpg);
+    background-size: cover;
 }

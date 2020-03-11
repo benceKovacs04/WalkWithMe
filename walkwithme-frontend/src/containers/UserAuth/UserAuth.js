@@ -24,6 +24,12 @@ export default function UserAuth() {
     return (
         <Fragment>
             {loggedIn ? (
+                <Button
+                    click={() => (window.location = "/upload")}
+                    buttonText="Upload Image"
+                />
+            ) : null}
+            {loggedIn ? (
                 <Button click={logOut} buttonText="Log out" />
             ) : (
                 <span>

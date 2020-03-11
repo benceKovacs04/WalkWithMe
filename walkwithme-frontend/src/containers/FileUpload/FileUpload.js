@@ -112,6 +112,9 @@ export default function FileUpload() {
                 ></input>
             ) : null}
             <div className={classes.Actions}>
+                <button onClick={() => (window.location = "/")}>
+                    Go Back!
+                </button>
                 {preview ? <button onClick={upload}>Upload!</button> : null}
                 {preview ? <button onClick={cancel}>Cancel</button> : null}
             </div>
