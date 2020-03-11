@@ -1,7 +1,54 @@
+.Container {
+    display: flex;
+    background-color: lightslategrey;
+    -webkit-box-shadow: 17px 18px 18px 3px rgba(36, 36, 36, 1);
+    -moz-box-shadow: 17px 18px 18px 3px rgba(36, 36, 36, 1);
+    box-shadow: 17px 18px 18px 3px rgba(36, 36, 36, 1);
+    border-radius: 42px 42px 42px 42px;
+    -moz-border-radius: 42px 42px 42px 42px;
+    -webkit-border-radius: 42px 42px 42px 42px;
+    border: 0px solid #000000;
+    width: 97%;
+    height: 95vh;
+    opacity: 0.9;
+    z-index: -1;
+
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.Text {
+    width: 45vw;
+    padding-top: 2%;
+    margin-right: 3%;
+    margin-left: 3%;
+}
+
+.Description {
+    width: 45vw;
+    height: 50vh;
+    margin-top: 2%;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 2px;
+    color: #fff;
+    font-family: "Exo", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    padding: 4px;
+}
+
+.Title {
+    width: 45vw;
+    height: ;
+}
+
 .Upload {
     width: 45vw;
-    margin: auto;
     padding-top: 2%;
+    margin-left: 3%;
 }
 
 .Actions {
@@ -31,7 +78,7 @@
     cursor: pointer;
 }
 
-.Upload input[type="text"] {
+.Text input[type="text"] {
     width: 250px;
     height: 30px;
     background: transparent;

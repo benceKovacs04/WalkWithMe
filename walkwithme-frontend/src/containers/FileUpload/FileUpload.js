@@ -89,36 +89,40 @@ export default function FileUpload() {
     });
 
     return (
-        <div className={classes.Upload}>
-            <div className={classes.Drag} {...getRootProps()}>
-                <input {...getInputProps()} />
-                {isDragActive ? (
-                    <p>Drop the picture here ...</p>
-                ) : (
-                    <p>
-                        Drag 'n' drop an image here, or click to select the
-                        image
-                    </p>
-                )}
+        <div className={classes.Container}>
+            <div className={classes.Upload}>
+                <div className={classes.Drag} {...getRootProps()}>
+                    <input {...getInputProps()} />
+                    {isDragActive ? (
+                        <p>Drop the picture here ...</p>
+                    ) : (
+                        <p>
+                            Drag 'n' drop an image here, or click to select the
+                            image
+                        </p>
+                    )}
+                </div>
+                {preview ? (
+                    <img className={rotateImageClass()} src={preview} />
+                ) : null}
+
+                <div className={classes.Actions}>
+                    <button onClick={() => (window.location = "/")}>
+                        Go Back!
+                    </button>
+                    {preview ? <button onClick={upload}>Upload!</button> : null}
+                    {preview ? <button onClick={cancel}>Cancel</button> : null}
+                </div>
+                {message ? <h3>{message}</h3> : null}
             </div>
-            {preview ? (
-                <img className={rotateImageClass()} src={preview} />
-            ) : null}
-            {preview ? (
+            <div className={classes.Text}>
                 <input
                     onChange={changeTitle}
                     type="text"
                     placeholder="Title"
                 ></input>
-            ) : null}
-            <div className={classes.Actions}>
-                <button onClick={() => (window.location = "/")}>
-                    Go Back!
-                </button>
-                {preview ? <button onClick={upload}>Upload!</button> : null}
-                {preview ? <button onClick={cancel}>Cancel</button> : null}
+                <textarea className={classes.Description}></textarea>
             </div>
-            {message ? <h3>{message}</h3> : null}
         </div>
     );
 }
