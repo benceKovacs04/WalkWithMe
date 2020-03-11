@@ -53,6 +53,7 @@ namespace WalkWithMe_ImageService.Controllers
 
                 var image = Request.Form.Files[0];
                 var title = Request.Form["title"];
+                var description = Request.Form["description"];
 
                 if (image != null)
                 {
@@ -66,6 +67,7 @@ namespace WalkWithMe_ImageService.Controllers
                     ImageModel imageModel = _imageService.CreateImageFromByteArray(imageBytes);
                     imageModel.UserId = userId;
                     imageModel.Title = title;
+                    imageModel.Description = description;
 
                     try
                     {

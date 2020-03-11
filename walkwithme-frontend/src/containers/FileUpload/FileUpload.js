@@ -8,13 +8,15 @@ export default function FileUpload() {
     const [image, setImage] = useState(null);
     const [preview, setPreview] = useState(null);
     const [orientation, setOrientation] = useState(null);
-    const [title, setTitle] = useState(null);
+    const [title, setTitle] = useState("");
+    const [description, setDescription] = useState("");
     const [message, setMessage] = useState(null);
 
     const upload = () => {
         const formData = new FormData();
         formData.append("image", image);
         formData.append("title", title);
+        formData.append("description", description);
         axios
             .post(
                 "https://localhost:5001/api/imageservice/uploadimage",
@@ -26,10 +28,14 @@ export default function FileUpload() {
                     }
                 }
             )
-            .then(setPreview(null), setImage(null), setMessage("*Uploading!"))
+            .then(setMessage("*Uploading!"))
             .then(resp => {
                 if (resp.status === 200) {
                     setMessage("Image successfully uploaded");
+                    setPreview(null);
+                    setImage(null);
+                    setTitle("");
+                    setDescription("");
                 }
             })
             .catch(error => {
@@ -57,6 +63,10 @@ export default function FileUpload() {
         setTitle(e.target.value);
     };
 
+    const changeDescription = e => {
+        setDescription(e.target.value);
+    };
+
     const onDrop = useCallback(acceptedFiles => {
         {
             setMessage(null);
@@ -68,8 +78,7 @@ export default function FileUpload() {
                 const readerTwo = new FileReader();
                 readerTwo.onload = () => {
                     setOrientation(
-                        EXIF.readFromBinaryFile(readerTwo.result).Orientation,
-                        console.log(EXIF.readFromBinaryFile(readerTwo.result))
+                        EXIF.readFromBinaryFile(readerTwo.result).Orientation
                     );
                 };
                 readerTwo.readAsArrayBuffer(file);
@@ -113,15 +122,24 @@ export default function FileUpload() {
                     {preview ? <button onClick={upload}>Upload!</button> : null}
                     {preview ? <button onClick={cancel}>Cancel</button> : null}
                 </div>
-                {message ? <h3>{message}</h3> : null}
             </div>
             <div className={classes.Text}>
                 <input
+                    value={title}
                     onChange={changeTitle}
                     type="text"
                     placeholder="Title"
+                    maxlength="90"
                 ></input>
-                <textarea className={classes.Description}></textarea>
+                <span>{title.length} / 90 characters</span>
+                <textarea
+                    value={description}
+                    onChange={changeDescription}
+                    className={classes.Description}
+                    maxlength="1500"
+                ></textarea>
+                <span>{description.length} / 1500 characters</span>
+                {message ? <h3>{message}</h3> : null}
             </div>
         </div>
     );

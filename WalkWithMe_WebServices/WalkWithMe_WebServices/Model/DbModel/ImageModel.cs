@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -16,6 +17,12 @@ namespace WalkWithMe_ImageService.Model.DB
         public string Latitude { get; set; }
         public DateTime PostDate { get; set; }
         public int Points { get; set; }
+        [Column(TypeName = "VARCHAR(90)")]
+        [StringLength(90)]
         public string Title { get; set; }
+
+        [Column(TypeName = "VARCHAR(1500)")]
+        [StringLength(1500)]
+        public string Description { get; set; }
     }
 }
