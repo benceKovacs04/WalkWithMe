@@ -30,6 +30,7 @@ const feedItem = props => {
                         className={classes.FeedItem}
                         src={getImageBaseUrl + props.image.imageId}
                     ></img>
+                    <span>By: {props.image.userName}</span>
                 </div>
                 <div className={classes.MapContainer}>
                     <Map
@@ -45,6 +46,23 @@ const feedItem = props => {
                             <Popup>This photo was taken here!</Popup>
                         </Marker>
                     </Map>
+                    <a
+                        className={classes.MapsLink}
+                        href={
+                            "http://maps.google.com/?cbll=" +
+                            props.image.latitude +
+                            "," +
+                            props.image.longitude +
+                            "&cbp=12,90,0,0,5&layer=c"
+                        }
+                        target="_blank"
+                    >
+                        Let's Walk!
+                    </a>
+                    <textarea
+                        className={classes.Description}
+                        value={props.image.description}
+                    ></textarea>
                 </div>
             </div>
         </Fragment>

@@ -67,6 +67,7 @@ namespace WalkWithMe_ImageService.Controllers
                     ImageModel imageModel = _imageService.CreateImageFromByteArray(imageBytes);
                     imageModel.UserId = userId;
                     imageModel.Title = title;
+                    imageModel.UserName = userName;
                     imageModel.Description = description;
 
                     try

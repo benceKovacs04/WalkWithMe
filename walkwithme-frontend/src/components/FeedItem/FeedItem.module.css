@@ -34,6 +34,41 @@
     border-radius: 30px;
 }
 
+.MapsLink {
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    background: lightgrey;
+    border-radius: 2px;
+    color: #fff;
+    font-family: "Exo", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    padding: 4px;
+    margin-top: 5px;
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+}
+
+.MapsLink:hover {
+    text-decoration: none;
+    color: grey;
+    background: lightgreen;
+}
+
+.Description {
+    margin-top: 2%;
+    width: 43vw;
+    height: 35vh;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 4px;
+    color: #fff;
+    font-family: "Exo", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    padding: 4px;
+}
+
 .FeedItemFooter {
     padding-top: 30px;
 }
