@@ -96,11 +96,16 @@ namespace WalkWithMe_ImageService.Controllers
         }
 
         [HttpGet]
-        [Route("/api/imageservice/getimagedetails")]
+        [Route("/api/imageservice/getrandomimagedetails")]
         public IActionResult GetImageIds()
         {
-            var imgList = _context.Images.ToList();
-            return new OkObjectResult(imgList);
+            Random rnd = new Random();
+            int toSkip = rnd.Next(1, _context.Images.Count());
+            var image = _context.Images.OrderBy(r => Guid.NewGuid()).Skip(toSkip).Take(1).First();
+            var testlist = new List<ImageModel>() { image };
+
+            //var imgList = _context.Images.ToList();
+            return new OkObjectResult(testlist);
         }
     
         [HttpGet]

@@ -12,9 +12,12 @@ export default function Feed() {
 
     useEffect(() => {
         axios
-            .get("https://localhost:5001/api/imageservice/getimagedetails", {
-                withCredentials: true
-            })
+            .get(
+                "https://localhost:5001/api/imageservice/getrandomimagedetails",
+                {
+                    withCredentials: true
+                }
+            )
             .then(resp => {
                 setImageDetails(resp.data);
                 console.log(resp.data);
@@ -27,6 +30,7 @@ export default function Feed() {
                 {imageDetails.map(image => {
                     return <FeedItem image={image} />;
                 })}
+                {/* <FeedItem image={imageDetails} /> */}
             </div>
         </div>
     );

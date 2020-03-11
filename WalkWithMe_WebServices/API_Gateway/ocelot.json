@@ -74,7 +74,7 @@
       "UpstreamHttpMethod": [ "GET" ]
     },
     {
-      "DownstreamPathTemplate": "/api/imageservice/getimagedetails",
+      "DownstreamPathTemplate": "/api/imageservice/getrandomimagedetails",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
@@ -82,7 +82,7 @@
           "Port": 44300
         }
       ],
-      "UpstreamPathTemplate": "/api/imageservice/getimagedetails",
+      "UpstreamPathTemplate": "/api/imageservice/getrandomimagedetails",
       "UpstreamHttpMethod": [ "GET" ]
     }
 
