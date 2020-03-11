@@ -63,6 +63,12 @@ const feedItem = props => {
                         className={classes.Description}
                         value={props.image.description}
                     ></textarea>
+                    <button
+                        className={classes.NextImage}
+                        onClick={props.newImage}
+                    >
+                        Take me somewhere else!
+                    </button>
                 </div>
             </div>
         </Fragment>

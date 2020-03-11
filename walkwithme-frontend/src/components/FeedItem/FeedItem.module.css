@@ -19,6 +19,10 @@
     width: 50vw;
 }
 
+.ImageContainer span {
+    padding-left: 5%;
+}
+
 .MapContainer {
     height: 400px;
     width: 43vw;
@@ -34,7 +38,8 @@
     border-radius: 30px;
 }
 
-.MapsLink {
+.MapsLink,
+.NextImage {
     border: 1px solid rgba(255, 255, 255, 0.6);
     background: lightgrey;
     border-radius: 2px;
@@ -49,7 +54,8 @@
     text-align: center;
 }
 
-.MapsLink:hover {
+.MapsLink:hover,
+.NextImage:hover {
     text-decoration: none;
     color: grey;
     background: lightgreen;
@@ -58,7 +64,7 @@
 .Description {
     margin-top: 2%;
     width: 43vw;
-    height: 35vh;
+    height: 30vh;
     background: transparent;
     border: 1px solid rgba(255, 255, 255, 0.6);
     border-radius: 4px;
@@ -74,9 +80,9 @@
 }
 
 .FeedItemTitle {
-    padding-top: 15px;
-    padding-bottom: 10px;
-    padding-left: 25px;
+    padding-top: 2%;
+    padding-bottom: 1%;
+    padding-left: 5%;
 }
 
 .Opacity {

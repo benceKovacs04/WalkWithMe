@@ -11,6 +11,10 @@ export default function Feed() {
     const [imageDetails, setImageDetails] = useState([]);
 
     useEffect(() => {
+        getNewImage();
+    }, []);
+
+    const getNewImage = () => {
         axios
             .get(
                 "https://localhost:5001/api/imageservice/getrandomimagedetails",
@@ -22,13 +26,13 @@ export default function Feed() {
                 setImageDetails(resp.data);
                 console.log(resp.data);
             });
-    }, []);
+    };
 
     return (
         <div className={classes.Feed}>
             <div>
                 {imageDetails.map(image => {
-                    return <FeedItem image={image} />;
+                    return <FeedItem newImage={getNewImage} image={image} />;
                 })}
                 {/* <FeedItem image={imageDetails} /> */}
             </div>
