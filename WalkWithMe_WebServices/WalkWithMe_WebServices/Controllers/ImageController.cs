@@ -102,10 +102,10 @@ namespace WalkWithMe_ImageService.Controllers
             Random rnd = new Random();
             int toSkip = rnd.Next(1, _context.Images.Count());
             var image = _context.Images.OrderBy(r => Guid.NewGuid()).Skip(toSkip).Take(1).First();
-            var testlist = new List<ImageModel>() { image };
+            var imageList = new List<ImageModel>() { image };
 
-            //var imgList = _context.Images.ToList();
-            return new OkObjectResult(testlist);
+            //for some reason,react crashses if i only send back one item instead of a list, so it is a list
+            return new OkObjectResult(imageList);
         }
     
         [HttpGet]
