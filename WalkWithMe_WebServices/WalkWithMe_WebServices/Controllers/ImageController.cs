@@ -38,7 +38,6 @@ namespace WalkWithMe_ImageService.Controllers
         [Route("api/imageservice/uploadimage")]
         public async Task UploadImage()
         {
-            // [FromBody] IDictionary<string, string> image
 
             var headers = Request.Headers;
 
@@ -50,6 +49,7 @@ namespace WalkWithMe_ImageService.Controllers
                 var handler = new JwtSecurityTokenHandler();
                 var token = handler.ReadJwtToken(encryptedToken);
                 var userId = token.Claims.First(x => x.Type == "sub").Value;
+                var userName = token.Claims.First(x => x.Type == "unique_name").Value;
 
                 var image = Request.Form.Files[0];
                 var title = Request.Form["title"];

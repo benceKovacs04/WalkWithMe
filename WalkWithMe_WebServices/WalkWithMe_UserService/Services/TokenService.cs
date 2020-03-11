@@ -17,7 +17,8 @@ namespace WalkWithMe_UserService.Services
             var authClaims = new[]
                  {
                     new Claim(JwtRegisteredClaimNames.Sub, user.Id),
-                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                    new Claim(JwtRegisteredClaimNames.UniqueName, user.UserName)
                 };
 
             var authSigninKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config.GetValue<string>("JWTSecretKey")));

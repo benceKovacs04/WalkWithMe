@@ -5,6 +5,7 @@ import { LoggedInContextWrapper } from "./context/LoggedInContext";
 import { BrowserRouter, Route } from "react-router-dom";
 import Login from "./containers/UserAuth/Login";
 import SignUp from "./containers/UserAuth/Signup";
+import classes from "./App.module.css";
 
 const app = () => (
     <BrowserRouter>

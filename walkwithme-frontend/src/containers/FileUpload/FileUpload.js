@@ -68,7 +68,8 @@ export default function FileUpload() {
                 const readerTwo = new FileReader();
                 readerTwo.onload = () => {
                     setOrientation(
-                        EXIF.readFromBinaryFile(readerTwo.result).Orientation
+                        EXIF.readFromBinaryFile(readerTwo.result).Orientation,
+                        console.log(EXIF.readFromBinaryFile(readerTwo.result))
                     );
                 };
                 readerTwo.readAsArrayBuffer(file);

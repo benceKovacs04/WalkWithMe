@@ -11,6 +11,7 @@ namespace WalkWithMe_ImageService.Model.DB
         [Key]
         public string ImageId { get; set; }
         public string UserId { get; set; }
+        public string UserName { get; set; }
         public string Longitude { get; set; }
         public string Latitude { get; set; }
         public DateTime PostDate { get; set; }

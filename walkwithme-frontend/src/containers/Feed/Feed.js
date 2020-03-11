@@ -10,9 +10,6 @@ export default function Feed() {
 
     const [imageDetails, setImageDetails] = useState([]);
 
-    const getImageBaseUrl =
-        "https://localhost:5001/api/imageservice/getimage?FileName=";
-
     useEffect(() => {
         axios
             .get("https://localhost:5001/api/imageservice/getimagedetails", {
@@ -25,30 +22,22 @@ export default function Feed() {
     }, []);
 
     return (
-        <div className={classes.Background}>
-            <div className={classes.Feed + " row"}>
-                <div className={classes.leftCol + " col-3"}>
-                    {loggedIn ? <FileUpload></FileUpload> : null}
-                </div>
-                <div className={"col-6"}>
-                    {/*} {imageDetails.map(image => {
-                        return (
-                            <FeedItem
-                                title={image.title}
-                                url={getImageBaseUrl + image.imageId}
-                            />
-                        );
-                    })} */}
-                    <FeedItem
+        <div className={classes.Feed}>
+            <div className={classes.leftCol + " col-3"}>
+                {loggedIn ? <FileUpload></FileUpload> : null}
+            </div>
+            <div className={"col-8"}>
+                {imageDetails.map(image => {
+                    return <FeedItem image={image} />;
+                })}
+                {/*} <FeedItem
                         title="title"
                         url="https://i.imgur.com/CopGoAS.jpg"
                     />
                     <FeedItem
                         title="title"
                         url="https://i.imgur.com/CopGoAS.jpg"
-                    />
-                </div>
-                <div className={"col-3"}></div>
+                /> */}
             </div>
         </div>
     );

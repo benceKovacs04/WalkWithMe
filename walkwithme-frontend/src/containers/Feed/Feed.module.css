@@ -1,14 +1,8 @@
 .Feed {
     padding: 15px;
-}
-
-.Background {
-    background: rgb(39, 44, 80);
-    background: radial-gradient(
-        circle,
-        rgba(39, 44, 80, 1) 0%,
-        rgba(14, 53, 93, 1) 100%
-    );
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
 }
 
 .leftCol {

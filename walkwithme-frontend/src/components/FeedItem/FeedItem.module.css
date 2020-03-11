@@ -1,7 +1,6 @@
 .ItemContainer {
     width: auto;
     margin: auto;
-    justify-content: center;
     margin-bottom: 24px;
     background-color: lightslategrey;
     -webkit-box-shadow: 17px 18px 18px 3px rgba(36, 36, 36, 1);
@@ -11,12 +10,25 @@
     -moz-border-radius: 42px 42px 42px 42px;
     -webkit-border-radius: 42px 42px 42px 42px;
     border: 0px solid #000000;
+    height: 70vh;
+    display: flex;
+}
+
+.ImageContainer {
+    height: 100%;
+    flex: 1;
+}
+
+.MapContainer {
+    height: 400px;
+    width: 30%;
+    flex: 1;
 }
 
 .FeedItem {
-    height: 500px;
+    height: 85%;
     display: block;
-    margin: auto;
+    margin-left: 20px;
 }
 
 .FeedItemFooter {
@@ -24,7 +36,7 @@
 }
 
 .FeedItemTitle {
-    padding-top: 10px;
-    padding-bottom: 5px;
+    padding-top: 15px;
+    padding-bottom: 10px;
     padding-left: 25px;
 }
