@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import classes from "./FeedItem.module.css";
 import { Map, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
@@ -19,30 +19,35 @@ const feedItem = props => {
     });
 
     return (
-        <div className={classes.ItemContainer}>
-            <div className={classes.ImageContainer}>
-                <h5 className={classes.FeedItemTitle}>{props.image.title}</h5>
-                <img
-                    className={classes.FeedItem}
-                    src={getImageBaseUrl + props.image.imageId}
-                ></img>
+        <Fragment>
+            <div className={classes.Opacity}></div>
+            <div className={classes.ItemContainer}>
+                <div className={classes.ImageContainer}>
+                    <h5 className={classes.FeedItemTitle}>
+                        {props.image.title}
+                    </h5>
+                    <img
+                        className={classes.FeedItem}
+                        src={getImageBaseUrl + props.image.imageId}
+                    ></img>
+                </div>
+                <div className={classes.MapContainer}>
+                    <Map
+                        center={mapPosition}
+                        zoom={18}
+                        style={{ width: "100%", height: "300px" }}
+                    >
+                        <TileLayer
+                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                        />
+                        <Marker position={mapPosition}>
+                            <Popup>This photo was taken here!</Popup>
+                        </Marker>
+                    </Map>
+                </div>
             </div>
-            <div className={classes.MapContainer}>
-                <Map
-                    center={mapPosition}
-                    zoom={18}
-                    style={{ width: "100%", height: "300px" }}
-                >
-                    <TileLayer
-                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                    />
-                    <Marker position={mapPosition}>
-                        <Popup>This photo was taken here!</Popup>
-                    </Marker>
-                </Map>
-            </div>
-        </div>
+        </Fragment>
     );
 };
 

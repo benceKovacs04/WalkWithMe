@@ -1,8 +1,11 @@
 .Feed {
-    padding: 15px;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
+    display: flexbox;
+    width: 95vw;
+    height: 90vh;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -45%);
 }
 
 .leftCol {

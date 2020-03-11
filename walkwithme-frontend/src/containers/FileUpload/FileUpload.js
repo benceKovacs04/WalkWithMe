@@ -98,49 +98,56 @@ export default function FileUpload() {
     });
 
     return (
-        <div className={classes.Container}>
-            <div className={classes.Upload}>
-                <div className={classes.Drag} {...getRootProps()}>
-                    <input {...getInputProps()} />
-                    {isDragActive ? (
-                        <p>Drop the picture here ...</p>
-                    ) : (
-                        <p>
-                            Drag 'n' drop an image here, or click to select the
-                            image
-                        </p>
-                    )}
-                </div>
-                {preview ? (
-                    <img className={rotateImageClass()} src={preview} />
-                ) : null}
+        <Fragment>
+            <div className={classes.Opacity}></div>
+            <div className={classes.Container}>
+                <div className={classes.Upload}>
+                    <div className={classes.Drag} {...getRootProps()}>
+                        <input {...getInputProps()} />
+                        {isDragActive ? (
+                            <p>Drop the picture here ...</p>
+                        ) : (
+                            <p>
+                                Drag 'n' drop an image here, or click to select
+                                the image
+                            </p>
+                        )}
+                    </div>
+                    {preview ? (
+                        <img className={rotateImageClass()} src={preview} />
+                    ) : null}
 
-                <div className={classes.Actions}>
-                    <button onClick={() => (window.location = "/")}>
-                        Go Back!
-                    </button>
-                    {preview ? <button onClick={upload}>Upload!</button> : null}
-                    {preview ? <button onClick={cancel}>Cancel</button> : null}
+                    <div className={classes.Actions}>
+                        <button onClick={() => (window.location = "/")}>
+                            Go Back!
+                        </button>
+                        {preview ? (
+                            <button onClick={upload}>Upload!</button>
+                        ) : null}
+                        {preview ? (
+                            <button onClick={cancel}>Cancel</button>
+                        ) : null}
+                    </div>
+                </div>
+                <div className={classes.Text}>
+                    <input
+                        value={title}
+                        onChange={changeTitle}
+                        type="text"
+                        placeholder="Title"
+                        maxlength="90"
+                    ></input>
+                    <span>{title.length} / 90 characters</span>
+                    <textarea
+                        value={description}
+                        onChange={changeDescription}
+                        className={classes.Description}
+                        maxlength="1500"
+                    ></textarea>
+                    <span>{description.length} / 1500 characters</span>
+                    {message ? <h3>{message}</h3> : null}
                 </div>
             </div>
-            <div className={classes.Text}>
-                <input
-                    value={title}
-                    onChange={changeTitle}
-                    type="text"
-                    placeholder="Title"
-                    maxlength="90"
-                ></input>
-                <span>{title.length} / 90 characters</span>
-                <textarea
-                    value={description}
-                    onChange={changeDescription}
-                    className={classes.Description}
-                    maxlength="1500"
-                ></textarea>
-                <span>{description.length} / 1500 characters</span>
-                {message ? <h3>{message}</h3> : null}
-            </div>
-        </div>
+        </Fragment>
     );
 }

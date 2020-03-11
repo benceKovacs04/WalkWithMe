@@ -23,10 +23,7 @@ export default function Feed() {
 
     return (
         <div className={classes.Feed}>
-            <div className={classes.leftCol + " col-3"}>
-                {/*}    {loggedIn ? <FileUpload></FileUpload> : null} */}
-            </div>
-            <div className={"col-8"}>
+            <div>
                 {imageDetails.map(image => {
                     return <FeedItem image={image} />;
                 })}
