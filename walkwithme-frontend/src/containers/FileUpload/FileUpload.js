@@ -11,8 +11,19 @@ export default function FileUpload() {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [message, setMessage] = useState(null);
+    const [isThereGPSData, setIsThereGPSData] = useState(true);
 
     const upload = () => {
+        if (!title) {
+            setMessage("*There is no title!")
+            return;
+        }
+
+        if (!isThereGPSData) {
+            setMessage("*You picture doesn't have GPS data in its metadata!")
+            return;
+        }
+
         const formData = new FormData();
         formData.append("image", image);
         formData.append("title", title);
@@ -77,25 +88,20 @@ export default function FileUpload() {
                 return;
             }
             const file = acceptedFiles[0]
-            let isThereGPSData;
 
             const readerTwo = new FileReader();
             readerTwo.onload = () => {
                 const metadata = EXIF.readFromBinaryFile(readerTwo.result)
-                if (!metadata.GPSLongitude || !metadata.GPSLatitude) {
-                    isThereGPSData = false;
+                console.log(metadata.hasOwnProperty("GPSLongitude") + " " + metadata.hasOwnProperty("GPSLatidude"))
+                if (!metadata.hasOwnProperty("GPSLongitude") || !metadata.hasOwnProperty("GPSLatitude")) {
+                    setIsThereGPSData(false)
                     return;
                 }
                 setOrientation(
                     metadata.Orientation
                 );
-                console.log(EXIF.readFromBinaryFile(readerTwo.result))
 
             };
-            if (!isThereGPSData) {
-                setMessage("*You picture doesn't have GPS data in its metadata!")
-                return;
-            }
             readerTwo.readAsArrayBuffer(file);
 
             setImage(file);
