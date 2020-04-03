@@ -48,7 +48,8 @@ export default function FileUpload() {
         setImage(null);
     };
 
-    const rotateImageClass = () => {
+    {
+        /*} const rotateImageClass = () => {
         switch (orientation) {
             case 3:
                 return classes.rotate180;
@@ -57,7 +58,8 @@ export default function FileUpload() {
             case 8:
                 return classes.rotate270;
         }
-    };
+    };*/
+    }
 
     const changeTitle = e => {
         setTitle(e.target.value);
@@ -74,22 +76,35 @@ export default function FileUpload() {
                 setMessage("*You can only select one image at a time!");
                 return;
             }
-            acceptedFiles.forEach(file => {
-                const readerTwo = new FileReader();
-                readerTwo.onload = () => {
-                    setOrientation(
-                        EXIF.readFromBinaryFile(readerTwo.result).Orientation
-                    );
-                };
-                readerTwo.readAsArrayBuffer(file);
+            const file = acceptedFiles[0]
+            let isThereGPSData;
 
-                setImage(file);
-                const reader = new FileReader();
-                reader.onload = () => {
-                    setPreview(reader.result);
-                };
-                reader.readAsDataURL(file);
-            });
+            const readerTwo = new FileReader();
+            readerTwo.onload = () => {
+                const metadata = EXIF.readFromBinaryFile(readerTwo.result)
+                if (!metadata.GPSLongitude || !metadata.GPSLatitude) {
+                    isThereGPSData = false;
+                    return;
+                }
+                setOrientation(
+                    metadata.Orientation
+                );
+                console.log(EXIF.readFromBinaryFile(readerTwo.result))
+
+            };
+            if (!isThereGPSData) {
+                setMessage("*You picture doesn't have GPS data in its metadata!")
+                return;
+            }
+            readerTwo.readAsArrayBuffer(file);
+
+            setImage(file);
+            const reader = new FileReader();
+            reader.onload = () => {
+                setPreview(reader.result);
+            };
+            reader.readAsDataURL(file);
+
         }
     }, []);
 
@@ -107,15 +122,13 @@ export default function FileUpload() {
                         {isDragActive ? (
                             <p>Drop the picture here ...</p>
                         ) : (
-                            <p>
-                                Drag 'n' drop an image here, or click to select
-                                the image
-                            </p>
-                        )}
+                                <p>
+                                    Drag 'n' drop an image here, or click to select
+                                    the image
+                                </p>
+                            )}
                     </div>
-                    {preview ? (
-                        <img className={rotateImageClass()} src={preview} />
-                    ) : null}
+                    {preview ? <img src={preview} /> : null}
 
                     <div className={classes.Actions}>
                         <button onClick={() => (window.location = "/")}>
