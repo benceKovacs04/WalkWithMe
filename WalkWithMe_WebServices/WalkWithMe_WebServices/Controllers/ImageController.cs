@@ -55,6 +55,7 @@ namespace WalkWithMe_ImageService.Controllers
                 var title = Request.Form["title"];
                 var description = Request.Form["description"];
 
+
                 if (image != null)
                 {
                     byte[] imageBytes;
@@ -64,11 +65,14 @@ namespace WalkWithMe_ImageService.Controllers
                         image.CopyTo(ms);
                         imageBytes = ms.ToArray();
                     }
+                    
                     ImageModel imageModel = _imageService.CreateImageFromByteArray(imageBytes);
                     imageModel.UserId = userId;
                     imageModel.Title = title;
                     imageModel.UserName = userName;
                     imageModel.Description = description;
+
+                   // imageBytes = _imageService.ResizeImageFromByteArrayToHalf(imageBytes);
 
                     try
                     {
@@ -99,7 +103,11 @@ namespace WalkWithMe_ImageService.Controllers
         [Route("/api/imageservice/getrandomimagedetails")]
         public IActionResult GetImageIds()
         {
-            if(_context.Images.Count() >= 1)
+            if(_context.Images.Count() == 1)
+            {
+                return new OkObjectResult(_context.Images.ToList());
+            }
+            else if(_context.Images.Count() > 1)
             {
                 Random rnd = new Random();
                 int toSkip = rnd.Next(1, _context.Images.Count());

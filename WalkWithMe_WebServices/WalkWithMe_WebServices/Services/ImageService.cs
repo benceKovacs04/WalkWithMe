@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using WalkWithMe_ImageService.Interfaces;
 using WalkWithMe_ImageService.Model.DB;
+using SkiaSharp;
 
 namespace WalkWithMe_ImageService.Services
 {
@@ -39,6 +40,22 @@ namespace WalkWithMe_ImageService.Services
             };
 
             return imageModel;
+        }
+
+        public byte[] ResizeImageFromByteArrayToHalf(byte[] bytes)
+        {
+            using (var ms = new MemoryStream(bytes))
+            {
+                using (var inputStream = new SKManagedStream(ms))
+                {
+                    using (var original = SKBitmap.Decode(inputStream))
+                    {
+                        var resized = original.Resize(new SKImageInfo(original.Width / 2, original.Height / 2), SKFilterQuality.Low);
+                        var image = SKImage.FromBitmap(resized);
+                        return image.Encode(SKEncodedImageFormat.Jpeg, 75).ToArray();
+                    }
+                }
+            }
         }
 
         private string ConvertToDecimal(string coord)

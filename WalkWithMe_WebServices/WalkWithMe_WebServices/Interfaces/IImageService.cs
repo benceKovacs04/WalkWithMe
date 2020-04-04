@@ -9,6 +9,7 @@ namespace WalkWithMe_ImageService.Interfaces
     public interface IImageService
     {
         ImageModel CreateImageFromByteArray(byte[] bytes);
+        byte[] ResizeImageFromByteArrayToHalf(byte[] bytes);
 
     }
 }
