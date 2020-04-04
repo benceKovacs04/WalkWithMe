@@ -24,7 +24,6 @@ export default function Feed() {
             )
             .then(resp => {
                 setImageDetails(resp.data);
-                console.log(resp.data);
             });
     };
 
