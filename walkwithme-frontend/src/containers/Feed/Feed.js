@@ -4,6 +4,8 @@ import classes from "./Feed.module.css";
 import LoggedInContext from "../../context/LoggedInContext";
 import axios from "axios";
 
+import * as signalR from '@aspnet/signalr'
+
 export default function Feed() {
     const { loggedIn } = useContext(LoggedInContext);
 
@@ -11,6 +13,12 @@ export default function Feed() {
 
     useEffect(() => {
         getNewImage();
+
+        if (loggedIn) {
+            const connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:5001/hubs/test").build();
+            connection.start();
+
+        }
     }, []);
 
     const getNewImage = () => {

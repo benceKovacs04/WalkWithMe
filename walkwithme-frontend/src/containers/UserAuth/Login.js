@@ -3,8 +3,6 @@ import classes from "./Auth.module.css";
 import axios from "axios";
 import loggedInContext from "../../context/LoggedInContext";
 
-import * as signalR from '@aspnet/signalr'
-
 export default function Login(props) {
     const [username, changeUsername] = useState(null);
     const [password, changePassword] = useState(null);
