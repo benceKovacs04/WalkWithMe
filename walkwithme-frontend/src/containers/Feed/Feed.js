@@ -1,7 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import FeedItem from "../../components/FeedItem/FeedItem";
 import classes from "./Feed.module.css";
-import FileUpload from "../FileUpload/FileUpload";
 import LoggedInContext from "../../context/LoggedInContext";
 import axios from "axios";
 

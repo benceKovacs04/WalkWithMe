@@ -1,21 +1,19 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using API_Gateway.CustomMiddleware;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.IdentityModel.Tokens;
-using Ocelot.DependencyInjection;
-using Ocelot.Middleware;
+using Microsoft.Extensions.Logging;
+using signalR_HUB.CustomMiddleware;
+using signalR_HUB.Hubs;
 
-namespace API_Gateway
+namespace signalR_HUB
 {
     public class Startup
     {
@@ -25,13 +23,21 @@ namespace API_Gateway
         }
 
         public IConfiguration Configuration { get; }
+
         // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCors();
-            services.AddOcelot();
-            
+            services.AddControllers();
+
+            services.AddCors(o => o.AddPolicy("CorsPolicy", builder =>
+            {
+                builder
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .AllowCredentials()
+                .WithOrigins("http://localhost:3000", "https://localhost:5001");
+            }));
+            services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -42,15 +48,19 @@ namespace API_Gateway
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseCors("CorsPolicy");
 
-            app.UseCors(options => options.SetIsOriginAllowed(x => _ = true)
-                .AllowAnyMethod().AllowAnyHeader().AllowCredentials());
+            app.UseHttpsRedirection();
 
-            app.UseJWTCookieToHeader();
+            app.UseRouting();
 
-            app.UseWebSockets();
-            app.UseOcelot().Wait();
-           
+            app.UseAuthorization();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+                endpoints.MapHub<TestHub>("/test");
+            });
         }
     }
 }

@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WalkWithMe_UserService", "W
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API_Gateway", "API_Gateway\API_Gateway.csproj", "{718B8906-CE59-44E0-9CC4-2121B9701811}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "signalR_HUB", "signalR_HUB\signalR_HUB.csproj", "{4153EBE4-288D-4589-B5F6-9D12CAB35CF3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{718B8906-CE59-44E0-9CC4-2121B9701811}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{718B8906-CE59-44E0-9CC4-2121B9701811}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{718B8906-CE59-44E0-9CC4-2121B9701811}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4153EBE4-288D-4589-B5F6-9D12CAB35CF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4153EBE4-288D-4589-B5F6-9D12CAB35CF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4153EBE4-288D-4589-B5F6-9D12CAB35CF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4153EBE4-288D-4589-B5F6-9D12CAB35CF3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,6 +1,7 @@
 ﻿using API_Gateway.Model;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace API_Gateway.CustomMiddleware
@@ -16,11 +17,13 @@ namespace API_Gateway.CustomMiddleware
 
         public async Task Invoke(HttpContext context)
         {
+
             var cookie = context.Request.Cookies["token"];
             if(cookie != null)
             {
                 context.Request.Headers.Append("Authorization", "Bearer " + cookie);
             }
+
 
             await _next.Invoke(context);
         }

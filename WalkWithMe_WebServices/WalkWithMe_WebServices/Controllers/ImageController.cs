@@ -72,7 +72,7 @@ namespace WalkWithMe_ImageService.Controllers
                     imageModel.UserName = userName;
                     imageModel.Description = description;
 
-                   // imageBytes = _imageService.ResizeImageFromByteArrayToHalf(imageBytes);
+                    imageBytes = _imageService.ResizeImageFromByteArrayToHalf(imageBytes);
 
                     try
                     {
