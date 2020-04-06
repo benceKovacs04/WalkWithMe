@@ -16,7 +16,7 @@ export default function Feed() {
 
         if (loggedIn) {
             const connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:5001/hubs/test").build();
-            connection.start();
+            connection.start({ withcredentials: true });
 
         }
     }, []);
