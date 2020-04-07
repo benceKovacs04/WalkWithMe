@@ -132,5 +132,13 @@ namespace WalkWithMe_ImageService.Controllers
 
 
         }
+
+        [HttpPatch]
+        [Route("/api/imageservice/updatepoints")]
+        public async Task UpdatePoints([FromBody] Dictionary<string, string> payload)
+        {
+            _context.Images.Find(payload["imageId"]).Points++;
+            await _context.SaveChangesAsync();
+        }
     }
 }
