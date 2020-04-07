@@ -3,6 +3,7 @@ import classes from "./FeedItem.module.css";
 import { Map, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
+import axios from 'axios'
 
 const feedItem = props => {
     const getImageBaseUrl =
@@ -18,6 +19,19 @@ const feedItem = props => {
         shadowUrl: require("leaflet/dist/images/marker-shadow.png")
     });
 
+    const onWalk = () => {
+        axios.patch(
+            "https://localhost:5001/api/imageservice/updatepoints",
+            {
+                imageId: props.image.imageId
+            }
+        ).then(resp => {
+            if (resp.status === 200) {
+                props.image.points++
+            }
+        }).catch(error => console.log(error))
+    }
+
     return (
         <Fragment>
             <div className={classes.Opacity}></div>
@@ -30,7 +44,10 @@ const feedItem = props => {
                         className={classes.FeedItem}
                         src={getImageBaseUrl + props.image.imageId}
                     ></img>
-                    <span>By: {props.image.userName}</span>
+                    <div className={classes.ImageFooter}>
+                        <p>By: {props.image.userName}</p>
+                        <p>{props.image.points} people have walked here</p>
+                    </div>
                 </div>
                 <div className={classes.MapContainer}>
                     <Map
@@ -56,6 +73,8 @@ const feedItem = props => {
                             "&cbp=12,90,0,0,5&layer=c"
                         }
                         target="_blank"
+                        onClick={onWalk}
+
                     >
                         Let's Walk!
                     </a>

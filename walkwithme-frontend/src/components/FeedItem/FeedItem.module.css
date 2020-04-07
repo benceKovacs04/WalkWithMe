@@ -19,8 +19,14 @@
     width: 50vw;
 }
 
-.ImageContainer span {
-    padding-left: 5%;
+.ImageFooter {
+    width: auto;
+    margin-left: 5%;
+    margin-right: 5%;
+    display: flex;
+    justify-content: space-between;
+    
+
 }
 
 .MapContainer {
