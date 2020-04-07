@@ -12,9 +12,14 @@ namespace signalR_HUB.Hubs
     public class NotificationHub : Hub
     {
         private readonly static ConnectionMapping<string> _connections = new ConnectionMapping<string>();
-        public async Task SendMessage(string message)
+        public async Task SendWalkNotification(string toSend)
         {
-            await Clients.All.SendAsync("ReceiveMessage", message + " : this is from the server");
+            var userConnections = _connections.getConnection(toSend);
+            foreach (var connection in userConnections)
+            {
+                await Clients.Client(connection).SendAsync("ReceiveWalkNotification", Context.User.Identity.Name);
+            }
+            
         }
 
         public override Task OnConnectedAsync()

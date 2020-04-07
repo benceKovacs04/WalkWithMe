@@ -84,7 +84,7 @@ namespace signalR_HUB
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-                endpoints.MapHub<TestHub>("/test");
+                endpoints.MapHub<NotificationHub>("/notification");
             });
         }
     }

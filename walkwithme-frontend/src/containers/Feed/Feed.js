@@ -10,16 +10,29 @@ export default function Feed() {
     const { loggedIn } = useContext(LoggedInContext);
 
     const [imageDetails, setImageDetails] = useState([]);
+    const [walkedWithMe, setWalkedWithMe] = useState("")
+
+    let connection = null;
+
+    if (loggedIn) {
+        connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:5001/hubs/notification").build();
+
+        connection.on("ReceiveWalkNotification", (from) => {
+            setWalkedWithMe(from)
+        })
+
+        connection.start({ withcredentials: true }).catch(error => console.log(error));
+    }
 
     useEffect(() => {
         getNewImage();
-
-        if (loggedIn) {
-            const connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:5001/hubs/notifications").build();
-            connection.start({ withcredentials: true });
-
-        }
     }, []);
+
+    const onWalk = (to) => {
+        if (loggedIn && connection != null) {
+            connection.invoke("SendWalkNotification", to)
+        }
+    }
 
     const getNewImage = () => {
         axios
@@ -37,8 +50,9 @@ export default function Feed() {
     return (
         <div className={classes.Feed}>
             <div>
+                <h1>{walkedWithMe}</h1>
                 {imageDetails.map(image => {
-                    return <FeedItem newImage={getNewImage} image={image} />;
+                    return <FeedItem newImage={getNewImage} onWalk={onWalk} image={image} />;
                 })}
                 {/* <FeedItem image={imageDetails} /> */}
             </div>

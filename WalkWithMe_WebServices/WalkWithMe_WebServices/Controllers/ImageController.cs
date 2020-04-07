@@ -38,7 +38,6 @@ namespace WalkWithMe_ImageService.Controllers
         [Route("api/imageservice/uploadimage")]
         public async Task UploadImage()
         {
-
             var headers = Request.Headers;
 
             if (headers.ContainsKey("Authorization"))
