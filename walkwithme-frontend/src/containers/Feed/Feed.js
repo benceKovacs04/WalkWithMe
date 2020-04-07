@@ -15,7 +15,7 @@ export default function Feed() {
         getNewImage();
 
         if (loggedIn) {
-            const connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:5001/hubs/test").build();
+            const connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:5001/hubs/notifications").build();
             connection.start({ withcredentials: true });
 
         }

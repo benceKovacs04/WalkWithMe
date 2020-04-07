@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace signalR_HUB.Hubs
 {
     [Authorize]
-    public class TestHub : Hub
+    public class NotificationHub : Hub
     {
         private readonly static ConnectionMapping<string> _connections = new ConnectionMapping<string>();
         public async Task SendMessage(string message)
