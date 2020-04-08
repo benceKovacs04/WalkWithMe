@@ -19,6 +19,20 @@ const feedItem = props => {
         shadowUrl: require("leaflet/dist/images/marker-shadow.png")
     });
 
+    const onWalkClick = () => {
+        props.onWalk(props.image.userName);
+        axios.patch(
+            "https://localhost:5001/api/imageservice/updatepoints",
+            {
+                imageId: props.image.imageId
+            }
+        ).then(resp => {
+            if (resp.status === 200) {
+                props.image.points++
+            }
+        })
+    }
+
 
     return (
         <Fragment>
@@ -61,7 +75,7 @@ const feedItem = props => {
                             "&cbp=12,90,0,0,5&layer=c"
                         }
                         target="_blank"
-                        onClick={() => props.onWalk(props.image.userName)}
+                        onClick={onWalkClick}
 
                     >
                         Let's Walk!
