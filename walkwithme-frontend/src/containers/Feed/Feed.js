@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect, useRef } from "react";
 import FeedItem from "../../components/FeedItem/FeedItem";
 import classes from "./Feed.module.css";
 import LoggedInContext from "../../context/LoggedInContext";
@@ -12,25 +12,26 @@ export default function Feed() {
     const [imageDetails, setImageDetails] = useState([]);
     const [walkedWithMe, setWalkedWithMe] = useState("")
 
-    let connection = null;
-
-    if (loggedIn) {
-        connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:5001/hubs/notification").build();
-
-        connection.on("ReceiveWalkNotification", (from) => {
-            setWalkedWithMe(from)
-        })
-
-        connection.start({ withcredentials: true }).catch(error => console.log(error));
-    }
+    const connection = useRef();
 
     useEffect(() => {
         getNewImage();
+
+        if (loggedIn) {
+            connection.current = new signalR.HubConnectionBuilder().withUrl("https://localhost:5001/hubs/notification").build();
+
+            connection.current.on("ReceiveWalkNotification", (from) => {
+                setWalkedWithMe(from)
+            })
+
+            connection.current.start({ withcredentials: true }).catch(error => console.log(error));
+        }
+
     }, []);
 
     const onWalk = (to) => {
-        if (loggedIn && connection != null) {
-            connection.invoke("SendWalkNotification", to)
+        if (loggedIn && connection.current != null) {
+            connection.current.invoke("SendWalkNotification", to)
         }
     }
 
