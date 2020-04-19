@@ -31,7 +31,6 @@ export default function Feed() {
             connection.current = new signalR.HubConnectionBuilder().withUrl("https://localhost:5001/hubs/notification").build();
 
             connection.current.on("ReceiveWalkNotification", (from) => {
-                //setWalkedWithMe(from)
                 notify(from);
             })
 
