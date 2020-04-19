@@ -1,16 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
 import classes from "./Toolbar.module.css";
 import UserAuth from "../../../containers/UserAuth/UserAuth";
+import LoggedInContext from '../../../context/LoggedInContext'
 
-const toolbar = props => (
-    <header className={classes.Toolbar}>
-        <div className={classes.logo}>
-            Walk<span>With</span>Me
-        </div>
-        <div>
-            <UserAuth />
-        </div>
-    </header>
-);
+export default function Toolbar() {
+    const { loggedIn } = useContext(LoggedInContext);
 
-export default toolbar;
+    return (
+        <header className={classes.Toolbar}>
+            <div className={classes.logo}>
+                Walk<span>With</span>Me
+        </div>
+            <div>
+                {loggedIn ? <button onClick={() => window.location = "/myImages"}>My images</button> : null}
+                <UserAuth />
+            </div>
+        </header>)
+}
+
