@@ -5,7 +5,9 @@ import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import axios from 'axios'
 
-const feedItem = props => {
+
+export default function FeedItem(props) {
+
     const getImageBaseUrl =
         "https://localhost:5001/api/imageservice/getimage?FileName=";
 
@@ -94,6 +96,5 @@ const feedItem = props => {
             </div>
         </Fragment>
     );
-};
+}
 
-export default feedItem;
