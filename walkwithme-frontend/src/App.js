@@ -8,6 +8,7 @@ import SignUp from "./containers/UserAuth/Signup";
 import classes from "./App.module.css";
 import FileUpload from "./containers/FileUpload/FileUpload";
 import { Notifications } from 'react-push-notification';
+import MyImages from './containers/MyImages/MyImages'
 
 const app = () => (
     <BrowserRouter>
@@ -25,6 +26,11 @@ const app = () => (
             <Route path="/login" render={() => <Login />} />
             <Route path="/signup" render={() => <SignUp />} />
             <Route path="/upload" render={() => <FileUpload />} />
+            <Route path="/myImages" render={() => (
+                <Layout>
+                    <MyImages />
+                </Layout>
+            )} />
         </LoggedInContextWrapper>
     </BrowserRouter>
 );

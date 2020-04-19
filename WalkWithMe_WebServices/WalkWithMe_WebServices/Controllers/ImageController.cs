@@ -139,5 +139,17 @@ namespace WalkWithMe_ImageService.Controllers
             _context.Images.Find(payload["imageId"]).Points++;
             await _context.SaveChangesAsync();
         }
+
+        [HttpGet]
+        [Route("/api/imageservice/getimagesbyuser")]
+        [Authorize]
+        public async Task<List<ImageModel>> GetImagesByUser()
+        {
+            string username = User.Identity.Name;
+
+            List <ImageModel> images = _context.Images.Where(image => image.UserName == username).ToList<ImageModel>();
+
+            return images;
+        }
     }
 }
