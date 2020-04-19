@@ -5,14 +5,24 @@ import LoggedInContext from "../../context/LoggedInContext";
 import axios from "axios";
 
 import * as signalR from '@aspnet/signalr'
+import addNotification from 'react-push-notification';
 
 export default function Feed() {
     const { loggedIn } = useContext(LoggedInContext);
 
     const [imageDetails, setImageDetails] = useState([]);
-    const [walkedWithMe, setWalkedWithMe] = useState("")
 
     const connection = useRef();
+
+    const notify = (from) => {
+        addNotification({
+            message: `${from} has walked with you!`,
+            theme: "darkblue",
+            native: false,
+            duration: 5000,
+
+        })
+    }
 
     useEffect(() => {
         getNewImage();
@@ -21,7 +31,8 @@ export default function Feed() {
             connection.current = new signalR.HubConnectionBuilder().withUrl("https://localhost:5001/hubs/notification").build();
 
             connection.current.on("ReceiveWalkNotification", (from) => {
-                setWalkedWithMe(from)
+                //setWalkedWithMe(from)
+                notify(from);
             })
 
             connection.current.start({ withcredentials: true }).catch(error => console.log(error));
@@ -51,11 +62,9 @@ export default function Feed() {
     return (
         <div className={classes.Feed}>
             <div>
-                <h1>{walkedWithMe}</h1>
                 {imageDetails.map(image => {
                     return <FeedItem newImage={getNewImage} onWalk={onWalk} image={image} />;
                 })}
-                {/* <FeedItem image={imageDetails} /> */}
             </div>
         </div>
     );

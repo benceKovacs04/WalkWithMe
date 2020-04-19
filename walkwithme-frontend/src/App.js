@@ -7,9 +7,11 @@ import Login from "./containers/UserAuth/Login";
 import SignUp from "./containers/UserAuth/Signup";
 import classes from "./App.module.css";
 import FileUpload from "./containers/FileUpload/FileUpload";
+import { Notifications } from 'react-push-notification';
 
 const app = () => (
     <BrowserRouter>
+        <Notifications />
         <LoggedInContextWrapper>
             <Route
                 path="/"

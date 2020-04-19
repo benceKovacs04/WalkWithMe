@@ -15,6 +15,7 @@ namespace signalR_HUB.Hubs
         public async Task SendWalkNotification(string toSend)
         {
             var userConnections = _connections.getConnection(toSend);
+            
             foreach (var connection in userConnections)
             {
                 await Clients.Client(connection).SendAsync("ReceiveWalkNotification", Context.User.Identity.Name);
