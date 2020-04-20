@@ -12,5 +12,7 @@ namespace WalkWithMe_ImageService.Interfaces
     {
         Task<bool> UploadImageToStorage(MemoryStream file, string fileName);
         Task<MemoryStream> GetImageFromStorage(string fileName);
+
+        Task<bool> DeleteImageFromStorage(string id);
     }
 }

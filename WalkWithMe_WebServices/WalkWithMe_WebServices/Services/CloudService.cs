@@ -51,5 +51,15 @@ namespace WalkWithMe_ImageService.Services
             return imageStream;
             
         }
+
+        public async Task<bool> DeleteImageFromStorage(string fileName)
+        {
+            CloudBlobContainer container = _client.GetContainerReference("images");
+            CloudBlockBlob blockBlob = container.GetBlockBlobReference(fileName);
+
+            bool result = await blockBlob.DeleteIfExistsAsync();
+
+            return result;
+        }
     }
 }

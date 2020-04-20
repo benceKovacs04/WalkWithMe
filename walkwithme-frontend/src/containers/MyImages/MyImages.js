@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from 'react'
+import classes from './MyImages.module.css'
+import ImageCard from './ImageCard/ImageCard'
+
 import axios from 'axios'
 
 export default function MyImages() {
@@ -15,9 +18,9 @@ export default function MyImages() {
     }, [])
 
     return (
-        <div>
+        <div className={classes.Container}>
             {imageDetails.map(image => {
-                return <p>{image.imageId}</p>
+                return <ImageCard image={image} />
             })}
         </div>
     )

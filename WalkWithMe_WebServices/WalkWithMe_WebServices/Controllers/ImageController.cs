@@ -147,9 +147,28 @@ namespace WalkWithMe_ImageService.Controllers
         {
             string username = User.Identity.Name;
 
-            List <ImageModel> images = _context.Images.Where(image => image.UserName == username).ToList<ImageModel>();
+            List<ImageModel> images = _context.Images.Where(image => image.UserName == username).ToList();
 
             return images;
+        }
+
+        [HttpPost]
+        [Route("api/imageservice/deleteimage")]
+        [Authorize]
+        public async Task DeleteImage([FromBody] Dictionary<string, string> payload)
+        {
+            string imageId = payload["imageId"];
+            var didDeleteFromCloud = await _cloudService.DeleteImageFromStorage(imageId);
+
+            if(didDeleteFromCloud)
+            {
+                _context.Images.Remove(_context.Images.Find(imageId));
+                int result = await _context.SaveChangesAsync();
+                if(result == 1)
+                {
+                    Response.StatusCode = 200;
+                }
+            }
         }
     }
 }

@@ -8,7 +8,7 @@ import axios from 'axios'
 
 export default function FeedItem(props) {
 
-    const getImageBaseUrl =
+    const ImageBaseUrl =
         "https://localhost:5001/api/imageservice/getimage?FileName=";
 
     const mapPosition = [props.image.latitude, props.image.longitude];
@@ -46,7 +46,7 @@ export default function FeedItem(props) {
                     </h5>
                     <img
                         className={classes.FeedItem}
-                        src={getImageBaseUrl + props.image.imageId}
+                        src={ImageBaseUrl + props.image.imageId}
                     ></img>
                     <div className={classes.ImageFooter}>
                         <p>By: {props.image.userName}</p>

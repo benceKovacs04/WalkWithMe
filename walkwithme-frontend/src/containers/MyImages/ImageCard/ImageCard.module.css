@@ -1,0 +1,38 @@
+.Container {
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    height: 450px;
+    min-width: 500px;
+    min-height: 400px;
+    border-radius: 10px;
+    background-color: lightgray;
+    margin: 5px;
+}
+
+.Container img {
+    display: block;
+    width:95%;
+    height: 80%;
+    margin: auto;
+    object-fit: contain;
+}
+
+.Container button {
+    width: 90%;
+    margin: auto;
+    height: 35px;
+    background: #fff;
+    border: 1px solid #fff;
+    cursor: pointer;
+    border-radius: 2px;
+    color: #a18d6c;
+    font-family: "Exo", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    outline: none;
+}
+
+.Container button:hover {
+    opacity: 0.6;
+}
