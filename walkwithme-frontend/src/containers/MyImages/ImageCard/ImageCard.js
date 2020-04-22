@@ -16,8 +16,12 @@ export default function ImageCard(props) {
 
     return (
         <div className={classes.Container}>
-            <p>{props.image.title}</p>
-            <img src={`https://localhost:5001/api/imageservice/getimage?FileName=${props.image.imageId}`} />
+            <div className={classes.OpacityContainer}></div>
+            <h5>{props.image.title}</h5>
+            <div className={classes.ImgContainer}>
+                <img src={`https://localhost:5001/api/imageservice/getimage?FileName=${props.image.imageId}`} />
+            </div>
+            <p>{props.image.points} people walkerd here</p>
             <button onClick={deleteImage}>Delete</button>
         </div>
     )
