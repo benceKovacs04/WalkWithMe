@@ -6,13 +6,18 @@ import LoggedInContext from '../../../context/LoggedInContext'
 export default function Toolbar() {
     const { loggedIn } = useContext(LoggedInContext);
 
+    let location = window.location.toString();
+    location = location[location.length - 1]
+
     return (
         <header className={classes.Toolbar}>
             <div className={classes.logo}>
                 Walk<span>With</span>Me
         </div>
             <div>
-                {loggedIn ? <button onClick={() => window.location = "/myImages"}>My images</button> : null}
+                {loggedIn ?
+                    location == "/" ? <button onClick={() => window.location = "/myImages"}>My images</button> : <button onClick={() => window.location = "/"}>Home</button>
+                    : null}
                 <UserAuth />
             </div>
         </header>)

@@ -17,6 +17,10 @@ export default function UserAuth() {
                     toggleLoggedIn();
                     Cookie.remove("secondaryToken");
                     Cookie.remove("token");
+
+                    if (window.location != "/") {
+                        window.location = "/"
+                    }
                 }
             });
     };
@@ -32,17 +36,17 @@ export default function UserAuth() {
             {loggedIn ? (
                 <Button click={logOut} buttonText="Log out" />
             ) : (
-                <span>
-                    <Button
-                        click={() => (window.location = "/login")}
-                        buttonText="Log in"
-                    />
-                    <Button
-                        click={() => (window.location = "/signup")}
-                        buttonText="Sign up!"
-                    />
-                </span>
-            )}
+                    <span>
+                        <Button
+                            click={() => (window.location = "/login")}
+                            buttonText="Log in"
+                        />
+                        <Button
+                            click={() => (window.location = "/signup")}
+                            buttonText="Sign up!"
+                        />
+                    </span>
+                )}
         </Fragment>
     );
 }
