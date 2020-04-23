@@ -3,9 +3,15 @@ import Button from "../../components/UI/Button/Button";
 import LoggedInContext from "../../context/LoggedInContext";
 import axios from "axios";
 import Cookie from "js-cookie";
+import { Redirect } from 'react-router-dom';
 
 export default function UserAuth() {
-    const { loggedIn, toggleLoggedIn } = useContext(LoggedInContext);
+    const [toHome, redirectToHome] = useState(false);
+    const [toUpload, redirectToUpload] = useState(false);
+    const [toLogin, redirectToLogin] = useState(false);
+    const [toSignUp, redirectToSignUp] = useState(false);
+
+    const { loggedIn, toggleLoggedIn, setUsername } = useContext(LoggedInContext);
 
     const logOut = () => {
         axios
@@ -15,11 +21,12 @@ export default function UserAuth() {
             .then(resp => {
                 if (resp.status === 200) {
                     toggleLoggedIn();
+                    setUsername("")
                     Cookie.remove("secondaryToken");
                     Cookie.remove("token");
 
                     if (window.location != "/") {
-                        window.location = "/"
+                        redirectToHome(true)
                     }
                 }
             });
@@ -27,9 +34,13 @@ export default function UserAuth() {
 
     return (
         <Fragment>
+            {toHome ? <Redirect to="/" /> : null}
+            {toUpload ? <Redirect to="/upload" /> : null}
+            {toLogin ? <Redirect to="/login" /> : null}
+            {toSignUp ? <Redirect to="/signup" /> : null}
             {loggedIn ? (
                 <Button
-                    click={() => (window.location = "/upload")}
+                    click={() => redirectToUpload(true)}
                     buttonText="Upload Image"
                 />
             ) : null}
@@ -38,11 +49,11 @@ export default function UserAuth() {
             ) : (
                     <span>
                         <Button
-                            click={() => (window.location = "/login")}
+                            click={() => redirectToLogin(true)}
                             buttonText="Log in"
                         />
                         <Button
-                            click={() => (window.location = "/signup")}
+                            click={() => redirectToSignUp(true)}
                             buttonText="Sign up!"
                         />
                     </span>

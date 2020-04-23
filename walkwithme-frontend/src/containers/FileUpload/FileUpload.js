@@ -3,6 +3,7 @@ import { useDropzone } from "react-dropzone";
 import classes from "./FileUpload.module.css";
 import axios from "axios";
 import EXIF from "exif-js";
+import { Redirect } from 'react-router-dom'
 
 export default function FileUpload() {
     const [image, setImage] = useState(null);
@@ -12,6 +13,8 @@ export default function FileUpload() {
     const [description, setDescription] = useState("");
     const [message, setMessage] = useState(null);
     const [isThereGPSData, setIsThereGPSData] = useState(true);
+
+    const [toHome, redirectToHome] = useState(false)
 
     const upload = () => {
         if (!title) {
@@ -120,6 +123,7 @@ export default function FileUpload() {
 
     return (
         <Fragment>
+            {toHome ? <Redirect to="/" /> : null}
             <div className={classes.Opacity}></div>
             <div className={classes.Container}>
                 <div className={classes.Upload}>
@@ -137,7 +141,7 @@ export default function FileUpload() {
                     {preview ? <img src={preview} /> : null}
 
                     <div className={classes.Actions}>
-                        <button onClick={() => (window.location = "/")}>
+                        <button onClick={() => redirectToHome(true)}>
                             Go Back!
                         </button>
                         {preview ? (

@@ -2,8 +2,10 @@ import React, { useState, useContext } from "react";
 import classes from "./Auth.module.css";
 import axios from "axios";
 import loggedInContext from "../../context/LoggedInContext";
+import { Redirect } from 'react-router-dom';
 
 export default function Login(props) {
+    const [redirect, setRedirect] = useState(false);
     const [username, changeUsername] = useState(null);
     const [password, changePassword] = useState(null);
     const [loading, changeLoading] = useState(null);
@@ -25,7 +27,8 @@ export default function Login(props) {
                 if (resp.status == 200) {
                     toggleLoggedIn();
                     setUsername(username);
-                    window.location = "/";
+                    setRedirect(!redirect)
+
                 } else if (resp.status === 401) {
                     changeLoading("Invalid username or password")
                 }
@@ -48,35 +51,36 @@ export default function Login(props) {
 
     return (
         <div className={classes.bodyBackground}>
-            <div className={classes.grad}>
-                <div className={classes.header}>
-                    <div>
-                        Walk<span>With</span>Me
+            {redirect ? <Redirect /> :
+                <div className={classes.grad}>
+                    <div className={classes.header}>
+                        <div>
+                            Walk<span>With</span>Me
                     </div>
-                </div>
-                <br></br>
-                <div className={classes.login}>
-                    <input
-                        type="text"
-                        placeholder="username"
-                        name="user"
-                        onChange={userNameSetter}
-                    />
+                    </div>
                     <br></br>
-                    <input
-                        onChange={passwordSetter}
-                        type="password"
-                        placeholder="password"
-                        name="password"
-                    />
-                    <br></br>
-                    <input onClick={loginClick} type="button" value="Login" />
-                    <button onClick={() => (window.location = "/")}>
-                        Home
+                    <div className={classes.login}>
+                        <input
+                            type="text"
+                            placeholder="username"
+                            name="user"
+                            onChange={userNameSetter}
+                        />
+                        <br></br>
+                        <input
+                            onChange={passwordSetter}
+                            type="password"
+                            placeholder="password"
+                            name="password"
+                        />
+                        <br></br>
+                        <input onClick={loginClick} type="button" value="Login" />
+                        <button onClick={() => (window.location = "/")}>
+                            Home
                     </button>
-                    <h3>{loading}</h3>
-                </div>
-            </div>
+                        <h3>{loading}</h3>
+                    </div>
+                </div>}
         </div>
     );
 }
