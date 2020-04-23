@@ -8,6 +8,13 @@ export default function MyImages() {
 
     const [imageDetails, setImageDetails] = useState([]);
 
+    const removeCard = (image) => {
+        const newArr = [...imageDetails];
+        newArr.splice(newArr.indexOf(image), 1)
+        setImageDetails(newArr);
+
+    }
+
     useEffect(() => {
         axios.get(
             "https://localhost:5001/api/imageservice/getimagesbyuser",
@@ -20,7 +27,7 @@ export default function MyImages() {
     return (
         <div className={classes.Container}>
             {imageDetails.map(image => {
-                return <ImageCard image={image} />
+                return <ImageCard onDelete={removeCard} image={image} />
             })}
         </div>
     )

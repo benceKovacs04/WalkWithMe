@@ -11,7 +11,11 @@ export default function ImageCard(props) {
             {
                 withCredentials: true
             }
-        ).then(resp => console.log(resp))
+        ).then(resp => {
+            if (resp.status === 200) {
+                props.onDelete(props.image)
+            }
+        })
     }
 
     return (
