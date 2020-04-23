@@ -3,13 +3,21 @@ import Cookie from "js-cookie";
 
 const loggedInContext = React.createContext({
     loggedIn: "",
-    toggleLoggedIn: () => {}
+    username: "",
+    toggleLoggedIn: () => { },
+    setUsername: () => { }
 });
 
 export const LoggedInContextWrapper = props => {
     let [loggedIn, setLoggedIn] = useState(
         Cookie.get("secondaryToken") ? true : false
     );
+
+    let [username, setUser] = useState("");
+
+    let setUsername = (user) => {
+        setUser(user)
+    }
 
     let toggleLoggedIn = () => {
         setLoggedIn(!loggedIn);
@@ -19,6 +27,8 @@ export const LoggedInContextWrapper = props => {
         <loggedInContext.Provider
             value={{
                 loggedIn,
+                username,
+                setUsername,
                 toggleLoggedIn
             }}
         >

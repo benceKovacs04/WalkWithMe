@@ -11,9 +11,10 @@ import { Notifications } from 'react-push-notification';
 import MyImages from './containers/MyImages/MyImages'
 
 const app = () => (
-    <BrowserRouter>
-        <Notifications />
-        <LoggedInContextWrapper>
+    <LoggedInContextWrapper>
+        <BrowserRouter>
+            <Notifications />
+
             <Route
                 path="/"
                 exact
@@ -31,8 +32,9 @@ const app = () => (
                     <MyImages />
                 </Layout>
             )} />
-        </LoggedInContextWrapper>
-    </BrowserRouter>
+
+        </BrowserRouter>
+    </LoggedInContextWrapper>
 );
 
 export default app;

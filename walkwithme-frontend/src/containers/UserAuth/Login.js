@@ -8,7 +8,7 @@ export default function Login(props) {
     const [password, changePassword] = useState(null);
     const [loading, changeLoading] = useState(null);
 
-    const { toggleLoggedIn } = useContext(loggedInContext);
+    const { toggleLoggedIn, setUsername } = useContext(loggedInContext);
 
     const loginClick = () => {
         changeLoading("Please wait");
@@ -22,8 +22,14 @@ export default function Login(props) {
                 { withCredentials: true }
             )
             .then(resp => {
-                toggleLoggedIn();
-                window.location = "/";
+                if (resp.status == 200) {
+                    toggleLoggedIn();
+                    setUsername(username);
+                    window.location = "/";
+                } else if (resp.status === 401) {
+                    changeLoading("Invalid username or password")
+                }
+
             })
             .catch(error => {
                 if (error.response.status === 401) {

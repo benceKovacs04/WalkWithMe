@@ -14,6 +14,10 @@ namespace signalR_HUB.Hubs
         private readonly static ConnectionMapping<string> _connections = new ConnectionMapping<string>();
         public async Task SendWalkNotification(string toSend)
         {
+            if (toSend == Context.User.Identity.Name)
+            {
+                return;
+            }
             var userConnections = _connections.getConnection(toSend);
             
             foreach (var connection in userConnections)

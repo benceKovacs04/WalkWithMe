@@ -38,63 +38,50 @@ namespace WalkWithMe_ImageService.Controllers
         [Route("api/imageservice/uploadimage")]
         public async Task UploadImage()
         {
-            var headers = Request.Headers;
+            var userName = Request.HttpContext.User.Identity.Name;
 
-            if (headers.ContainsKey("Authorization"))
+            // http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier is the type of the claim that holds the user ID ??
+            var userId = Request.HttpContext.User.Claims.ToList()[0].Value;
+
+            var image = Request.Form.Files[0];
+            var title = Request.Form["title"];
+            var description = Request.Form["description"];
+
+            if (image != null)
             {
-                string encryptedToken = headers["Authorization"];
-                encryptedToken = encryptedToken.Replace("Bearer ", "");
+                byte[] imageBytes;
 
-                var handler = new JwtSecurityTokenHandler();
-                var token = handler.ReadJwtToken(encryptedToken);
-                var userId = token.Claims.First(x => x.Type == "sub").Value;
-                var userName = token.Claims.First(x => x.Type == "unique_name").Value;
-
-                var image = Request.Form.Files[0];
-                var title = Request.Form["title"];
-                var description = Request.Form["description"];
-
-
-                if (image != null)
+                using (var ms = new MemoryStream())
                 {
-                    byte[] imageBytes;
-
-                    using (var ms = new MemoryStream())
-                    {
-                        image.CopyTo(ms);
-                        imageBytes = ms.ToArray();
-                    }
-                    
-                    ImageModel imageModel = _imageService.CreateImageFromByteArray(imageBytes);
-                    imageModel.UserId = userId;
-                    imageModel.Title = title;
-                    imageModel.UserName = userName;
-                    imageModel.Description = description;
-
-                    imageBytes = _imageService.ResizeImageFromByteArrayToHalf(imageBytes);
-
-                    try
-                    {
-                        await _context.Images.AddAsync(imageModel);
-                        await _context.SaveChangesAsync();
-                        await _cloudService.UploadImageToStorage(new MemoryStream(imageBytes), imageModel.ImageId);
-                        Response.StatusCode = 200;
-                    }
-                    catch (DbException e)
-                    {
-                        Response.StatusCode = 400;
-                        Response.ContentType = "application/json";
-                        await Response.Body.WriteAsync(Encoding.UTF8.GetBytes(e.ToString()));
-                    }
+                    image.CopyTo(ms);
+                    imageBytes = ms.ToArray();
                 }
-                else
+                    
+                ImageModel imageModel = _imageService.CreateImageFromByteArray(imageBytes);
+                imageModel.UserId = userId;
+                imageModel.Title = title;
+                imageModel.UserName = userName;
+                imageModel.Description = description;
+
+                imageBytes = _imageService.ResizeImageFromByteArrayToHalf(imageBytes);
+
+                try
+                {
+                    await _context.Images.AddAsync(imageModel);
+                    await _context.SaveChangesAsync();
+                    await _cloudService.UploadImageToStorage(new MemoryStream(imageBytes), imageModel.ImageId);
+                    Response.StatusCode = 200;
+                }
+                catch (DbException e)
                 {
                     Response.StatusCode = 400;
+                    Response.ContentType = "application/json";
+                    await Response.Body.WriteAsync(Encoding.UTF8.GetBytes(e.ToString()));
                 }
             }
             else
             {
-                Response.StatusCode = 401;
+                Response.StatusCode = 400;
             }
         }
 
