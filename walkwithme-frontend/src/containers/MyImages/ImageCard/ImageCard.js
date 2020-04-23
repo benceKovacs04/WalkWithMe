@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import classes from './ImageCard.module.css'
 import axios from 'axios';
 
@@ -26,7 +26,7 @@ export default function ImageCard(props) {
                 <img src={`https://localhost:5001/api/imageservice/getimage?FileName=${props.image.imageId}`} />
             </div>
             <p>{props.image.points} people walkerd here</p>
-            <button onClick={deleteImage}>Delete</button>
+            <button onClick={() => props.showModal(true)}>Delete</button>
         </div>
     )
 }

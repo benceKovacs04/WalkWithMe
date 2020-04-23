@@ -6,3 +6,60 @@
     margin: auto;
     margin-top: 4%;
 }
+
+.ModalBackground {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    z-index: 1;
+    background-color: black;
+    opacity: 0.8;
+}
+
+.ModalWindow {
+    position: absolute;
+    top:25%;
+    left:25%;
+    width: 50%;
+    height: 20%;
+    background-color: lightslategrey;
+    border-radius: 30px;
+    z-index: 2;
+
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center; 
+}
+
+.ModalWindow .ButtonContainer {
+    width: 90%;
+    height: 20%;
+    margin-left: auto;
+    margin-right: auto; 
+    margin-top: 20px;
+    display: flex;
+
+}
+
+.ModalWindow button {
+    width: 40%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+    height: 35px;
+    background: #fff;
+    border: 1px solid #fff;
+    cursor: pointer;
+    border-radius: 2px;
+    color: #a18d6c;
+    font-family: "Exo", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    outline: none;
+}
+
+.ModalWindow .ButtonContainer button:hover {
+    opacity: 0.6;
+}
