@@ -28,6 +28,7 @@ namespace WalkWithMe_UserService.Controllers
             {
                 User user = await _userManager.FindByIdAsync(userId);
                 var result = await _userManager.ConfirmEmailAsync(user, token);
+                Response.Redirect("http://localhost:3000/login");
             }
         }
     }
