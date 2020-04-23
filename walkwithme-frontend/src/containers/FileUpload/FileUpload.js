@@ -41,7 +41,7 @@ export default function FileUpload() {
             )
             .then(setMessage("*Uploading!"))
             .then(resp => {
-                if (resp.status === 200) {
+                if (resp.status === 201) {
                     setMessage("Image successfully uploaded");
                     setPreview(null);
                     setImage(null);

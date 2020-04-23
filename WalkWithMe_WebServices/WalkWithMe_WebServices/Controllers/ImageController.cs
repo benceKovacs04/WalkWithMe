@@ -70,7 +70,7 @@ namespace WalkWithMe_ImageService.Controllers
                     await _context.Images.AddAsync(imageModel);
                     await _context.SaveChangesAsync();
                     await _cloudService.UploadImageToStorage(new MemoryStream(imageBytes), imageModel.ImageId);
-                    Response.StatusCode = 200;
+                    Response.StatusCode = 201;
                 }
                 catch (DbException e)
                 {
