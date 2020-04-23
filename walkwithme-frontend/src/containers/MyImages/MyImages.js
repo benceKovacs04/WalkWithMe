@@ -9,12 +9,7 @@ export default function MyImages() {
     const [imageDetails, setImageDetails] = useState([]);
     const [modalShowing, setModalShowing] = useState(false)
 
-    const removeCard = (image) => {
-        const newArr = [...imageDetails];
-        newArr.splice(newArr.indexOf(image), 1)
-        setImageDetails(newArr);
-
-    }
+    const [imageToDelete, setImageToDelete] = useState();
 
     useEffect(() => {
         axios.get(
@@ -25,6 +20,31 @@ export default function MyImages() {
         })
     }, [])
 
+    const removeCard = (image) => {
+        const newArr = [...imageDetails];
+        newArr.splice(newArr.indexOf(image), 1)
+        setImageDetails(newArr);
+    }
+
+    const deleteImage = () => {
+        axios.post(
+            "https://localhost:5001/api/imageservice/deleteimage",
+            { imageId: imageToDelete.imageId },
+            {
+                withCredentials: true
+            }
+        ).then(resp => {
+            if (resp.status === 200) {
+                removeCard(imageToDelete)
+            }
+        })
+    }
+
+    const showModalSetImage = (image) => {
+        setModalShowing(true)
+        setImageToDelete(image)
+    }
+
     return (
         <Fragment>
             {modalShowing ?
@@ -33,8 +53,14 @@ export default function MyImages() {
                     <div className={classes.ModalWindow}>
                         <h2>Are you sure you want to delete this picture?</h2>
                         <div className={classes.ButtonContainer}>
-                            <button>Yes</button>
-                            <button>No</button>
+                            <button onClick={() => {
+                                setModalShowing(false)
+                                deleteImage()
+                            }}>Yes</button>
+                            <button onClick={() => {
+                                setModalShowing(false)
+                                setImageToDelete(null)
+                            }}>No</button>
                         </div>
                     </div>
                 </div> : null
@@ -42,7 +68,7 @@ export default function MyImages() {
 
             <div className={classes.Container}>
                 {imageDetails.map(image => {
-                    return <ImageCard showModal={setModalShowing} onDelete={removeCard} image={image} />
+                    return <ImageCard showModalSetImageToDelete={showModalSetImage} onDelete={removeCard} image={image} />
                 })}
             </div>
         </Fragment>

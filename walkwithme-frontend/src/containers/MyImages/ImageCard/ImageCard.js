@@ -26,7 +26,7 @@ export default function ImageCard(props) {
                 <img src={`https://localhost:5001/api/imageservice/getimage?FileName=${props.image.imageId}`} />
             </div>
             <p>{props.image.points} people walkerd here</p>
-            <button onClick={() => props.showModal(true)}>Delete</button>
+            <button onClick={() => props.showModalSetImageToDelete(props.image)}>Delete</button>
         </div>
     )
 }
