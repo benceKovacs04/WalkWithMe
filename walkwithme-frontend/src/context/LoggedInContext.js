@@ -13,10 +13,13 @@ export const LoggedInContextWrapper = props => {
         Cookie.get("secondaryToken") ? true : false
     );
 
-    let [username, setUser] = useState("");
+    let [username, setUser] = useState(
+        Cookie.get("username") ? Cookie.get("username") : ""
+    );
 
     let setUsername = (user) => {
         setUser(user)
+        Cookie.set("username", user)
     }
 
     let toggleLoggedIn = () => {

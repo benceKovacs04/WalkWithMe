@@ -5,7 +5,7 @@ import loggedInContext from "../../context/LoggedInContext";
 import { Redirect } from 'react-router-dom';
 
 export default function Login(props) {
-    const [redirect, setRedirect] = useState(false);
+    const [toHome, redirectToHome] = useState(false);
     const [username, changeUsername] = useState(null);
     const [password, changePassword] = useState(null);
     const [loading, changeLoading] = useState(null);
@@ -27,7 +27,7 @@ export default function Login(props) {
                 if (resp.status == 200) {
                     toggleLoggedIn();
                     setUsername(username);
-                    setRedirect(!redirect)
+                    redirectToHome(true)
 
                 } else if (resp.status === 401) {
                     changeLoading("Invalid username or password")
@@ -51,7 +51,7 @@ export default function Login(props) {
 
     return (
         <div className={classes.bodyBackground}>
-            {redirect ? <Redirect /> :
+            {toHome ? <Redirect to="/" /> :
                 <div className={classes.grad}>
                     <div className={classes.header}>
                         <div>
@@ -75,7 +75,7 @@ export default function Login(props) {
                         />
                         <br></br>
                         <input onClick={loginClick} type="button" value="Login" />
-                        <button onClick={() => (window.location = "/")}>
+                        <button onClick={() => redirectToHome(true)}>
                             Home
                     </button>
                         <h3>{loading}</h3>

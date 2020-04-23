@@ -24,6 +24,7 @@ export default function UserAuth() {
                     setUsername("")
                     Cookie.remove("secondaryToken");
                     Cookie.remove("token");
+                    Cookie.remove("username")
 
                     if (window.location != "/") {
                         redirectToHome(true)

@@ -19,8 +19,11 @@ export default function Toolbar() {
             {toHome ? <Redirect to="/" /> : null}
             <div className={classes.logo}>
                 Walk<span>With</span>Me
+                {loggedIn ? <div className={classes.User}>
+                    <p>Welcome, <span>{username}</span>! </p>
+                </div> : null}
             </div>
-            <p>{username}asd</p>
+
             <div>
                 {loggedIn ?
                     location == "/" ? <button onClick={() => redirectToImages(true)}>My images</button> : <button onClick={() => redirectToHome(true)}>Home</button>
