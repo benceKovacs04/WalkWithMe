@@ -5,7 +5,6 @@ import LoggedInContext from "../../context/LoggedInContext";
 import webSocketContext from "../../context/WebSocketContext";
 import axios from "axios";
 
-import WebSocketContext from "../../context/WebSocketContext";
 
 export default function Feed() {
     const { loggedIn } = useContext(LoggedInContext);

@@ -40,7 +40,10 @@ export const WebSocketContextWrapper = props => {
     }
 
     const closeWebsocketConnection = () => {
-        connection.current.stop()
+        if (connection.current != null) {
+            connection.current.stop()
+        }
+
     }
 
     return (
