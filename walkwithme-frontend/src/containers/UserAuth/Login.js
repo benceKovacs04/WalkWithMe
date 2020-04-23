@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import classes from "./Auth.module.css";
 import axios from "axios";
 import loggedInContext from "../../context/LoggedInContext";
+import webSocketContext from "../../context/WebSocketContext";
 import { Redirect } from 'react-router-dom';
 
 export default function Login(props) {
@@ -11,6 +12,7 @@ export default function Login(props) {
     const [loading, changeLoading] = useState(null);
 
     const { toggleLoggedIn, setUsername } = useContext(loggedInContext);
+    const { connect } = useContext(webSocketContext)
 
     const loginClick = () => {
         changeLoading("Please wait");
@@ -27,6 +29,7 @@ export default function Login(props) {
                 if (resp.status == 200) {
                     toggleLoggedIn();
                     setUsername(username);
+                    connect();
                     redirectToHome(true)
 
                 } else if (resp.status === 401) {

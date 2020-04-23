@@ -2,46 +2,25 @@ import React, { useState, useContext, useEffect, useRef } from "react";
 import FeedItem from "../../components/FeedItem/FeedItem";
 import classes from "./Feed.module.css";
 import LoggedInContext from "../../context/LoggedInContext";
+import webSocketContext from "../../context/WebSocketContext";
 import axios from "axios";
 
-import * as signalR from '@aspnet/signalr'
-import addNotification from 'react-push-notification';
+import WebSocketContext from "../../context/WebSocketContext";
 
 export default function Feed() {
     const { loggedIn } = useContext(LoggedInContext);
+    const { walking } = useContext(webSocketContext);
 
     const [imageDetails, setImageDetails] = useState([]);
-
-    const connection = useRef();
-
-    const notify = (from) => {
-        addNotification({
-            message: `${from} has walked with you!`,
-            theme: "darkblue",
-            native: false,
-            duration: 5000,
-
-        })
-    }
 
     useEffect(() => {
         getNewImage();
 
-        if (loggedIn) {
-            connection.current = new signalR.HubConnectionBuilder().withUrl("https://localhost:5001/hubs/notification").build();
-
-            connection.current.on("ReceiveWalkNotification", (from) => {
-                notify(from);
-            })
-
-            connection.current.start({ withcredentials: true }).catch(error => console.log(error));
-        }
-
     }, []);
 
     const onWalk = (to) => {
-        if (loggedIn && connection.current != null) {
-            connection.current.invoke("SendWalkNotification", to)
+        if (loggedIn) {
+            walking(to)
         }
     }
 

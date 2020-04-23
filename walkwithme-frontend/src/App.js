@@ -9,31 +9,34 @@ import classes from "./App.module.css";
 import FileUpload from "./containers/FileUpload/FileUpload";
 import { Notifications } from 'react-push-notification';
 import MyImages from './containers/MyImages/MyImages'
+import { WebSocketContextWrapper } from "./context/WebSocketContext";
 
 const app = () => (
     <LoggedInContextWrapper>
-        <BrowserRouter>
-            <Notifications />
+        <WebSocketContextWrapper>
+            <BrowserRouter>
+                <Notifications />
 
-            <Route
-                path="/"
-                exact
-                render={() => (
+                <Route
+                    path="/"
+                    exact
+                    render={() => (
+                        <Layout>
+                            <Feed />
+                        </Layout>
+                    )}
+                />
+                <Route path="/login" render={() => <Login />} />
+                <Route path="/signup" render={() => <SignUp />} />
+                <Route path="/upload" render={() => <FileUpload />} />
+                <Route path="/myImages" render={() => (
                     <Layout>
-                        <Feed />
+                        <MyImages />
                     </Layout>
-                )}
-            />
-            <Route path="/login" render={() => <Login />} />
-            <Route path="/signup" render={() => <SignUp />} />
-            <Route path="/upload" render={() => <FileUpload />} />
-            <Route path="/myImages" render={() => (
-                <Layout>
-                    <MyImages />
-                </Layout>
-            )} />
+                )} />
 
-        </BrowserRouter>
+            </BrowserRouter>
+        </WebSocketContextWrapper>
     </LoggedInContextWrapper>
 );
 

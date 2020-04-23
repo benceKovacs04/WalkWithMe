@@ -1,6 +1,7 @@
 import React, { Fragment, useState, useContext } from "react";
 import Button from "../../components/UI/Button/Button";
 import LoggedInContext from "../../context/LoggedInContext";
+import WebSocketContext from "../../context/WebSocketContext";
 import axios from "axios";
 import Cookie from "js-cookie";
 import { Redirect } from 'react-router-dom';
@@ -12,6 +13,8 @@ export default function UserAuth() {
     const [toSignUp, redirectToSignUp] = useState(false);
 
     const { loggedIn, toggleLoggedIn, setUsername } = useContext(LoggedInContext);
+    const { closeWebsocketConnection } = useContext(WebSocketContext)
+
 
     const logOut = () => {
         axios
@@ -25,6 +28,7 @@ export default function UserAuth() {
                     Cookie.remove("secondaryToken");
                     Cookie.remove("token");
                     Cookie.remove("username")
+                    closeWebsocketConnection();
 
                     if (window.location != "/") {
                         redirectToHome(true)
