@@ -1,6 +1,6 @@
 # WalkWithMe
 
-A current Pet-project, a simple image sharing platform thematized around traveling. If a user
+WalkWithMe is a simple image sharing platform thematized around traveling. If a user
 uploads a picture with location data, other users can walk around the place where the picture was
 taken on Google Earth 
 
